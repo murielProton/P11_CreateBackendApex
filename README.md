@@ -1,5 +1,5 @@
 # P11_CreateBackendApex
-This is an OpenClassroom's exercisse. I'm asked to create a Salesforce Application with the sObjects : Account, Contract, Order and OrderItem. OrderItem is the API name of Order Product.
+This is an OpenClassroom's exercisse. I'm asked to create a Salesforce Application with the sObjects : Account, Contract, Order, Task and OrderItem. OrderItem is the API name of Order Product.
 This exercisse demands that I create a trigger on Order, two Apex classes to set 2 different fuctions, and a batch.
 # Trigger on Order
 - when the field Status changes from Draft to Active, verify if the record is linked to an actual Product. If not send an Error to the user.
