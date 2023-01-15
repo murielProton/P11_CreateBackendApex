@@ -20,6 +20,6 @@ public with sharing class AccountDataFactory_Test {
                                             FROM Account
                                             WHERE Name LIKE :nameLike
                                            ];
-        System.assertEquals(accountsListToTest.size(), 5, 'AccountDataFactory.createAccountsList should create 5 records of Accounts.');
+        System.assertEquals( 5, accountsListToTest.size(), 'AccountDataFactory.createAccountsList should create 5 records of Accounts.');
     }
 }

@@ -6,6 +6,7 @@
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 public with sharing class AccountDataFactory {
+    
     public static void createAccountsList(Integer numberOfAccounts){
         List<Account> accountsListToInsertForTest = new List<Account>();
         for(Integer i = 0 ; i < numberOfAccounts ; i++){
