@@ -15,3 +15,13 @@ This exercisse demands that I create a trigger on Order, two Apex classes to set
     - Status : New
     - Priority : Normal
     - every 5 days send an alert
+# Naming convention design pattern
+Folow the rules of this GitHub Repository
+https://github.com/cfpb/salesforce-docs/blob/master/_pages/Salesforce-Naming-Conventions.md
+# Desigh pattern 'domain layer class'
+SobjectNameForBatch -> contains all the methodes used in the Batch.
+SobjectNameFormat -> contains all the methodes used to convert a type to an other type. (for example Lists into Sets)
+SobjectNameGet -> contains all the methodes used to get reccords, using SOQL.
+SobjectNameTypeFilter -> contains all the methodes to filter throught the cited type.
+SobjectNameDataFactory -> contains all the methodes that generates records for the tests.
+
