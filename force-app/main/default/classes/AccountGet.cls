@@ -21,7 +21,7 @@ public with sharing class AccountGet {
                                         WHERE Name= :accountName 
                                         LIMIT 1];
         } else {
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert an Account reccord.');
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an Account reccord.');
         }
         return accountToReturn;
     }
@@ -39,7 +39,7 @@ public with sharing class AccountGet {
                             FROM Account
                             ];
         } else {
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert an Account reccord.');
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an Account reccord.');
         }
         return accountsList;
     }
