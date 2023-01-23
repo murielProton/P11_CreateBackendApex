@@ -22,7 +22,7 @@ public with sharing class AccountGet_Test {
         Account accountToTest = AccountGet.getAccount(accountName+3);
         Test.stopTest();
 
-        System.assertEquals(accountName+3, accountToTest.name, 'getAccount(accountName) from AccountDataFactory should return only one Account record by the name of :'+accountName+3+'.');
+        System.assertEquals(accountName+3, accountToTest.name, 'getAccount(accountName) from AccountGet should return only one Account record by the name of :'+accountName+3+'.');
     }
     @isTest
     public static void testGetAccountsAll(){
@@ -31,6 +31,6 @@ public with sharing class AccountGet_Test {
         List<Account> accountsListToTest = AccountGet.getAccountsAll();
         Test.stopTest();
 
-        System.assertEquals( 5, accountsListToTest.size(),'AccountDataFactory.getAccountsAll() should return a list of five records.');
+        System.assertEquals( 5, accountsListToTest.size(),'AccountGet.getAccountsAll() should return a list of five records.');
     }
 }
