@@ -22,7 +22,7 @@ public with sharing class Pricebook2Get {
                             WHERE Name = :pricebookName
                             ];
         } else {
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an Pricebook2 reccord.');
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get a Pricebook2 reccord.');
         }
         return pricebook2List;
     }
