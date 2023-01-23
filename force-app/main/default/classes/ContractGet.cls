@@ -12,7 +12,8 @@ public with sharing class ContractGet {
 
         if(Contract.SObjectType.getDescribe().isAccessible()){
             contractsListToReturn = [SELECT Id,
-                                            Name
+                                            Name,
+                                            AccountId
                                      FROM Contract
                                     ];
         } else {
@@ -26,7 +27,8 @@ public with sharing class ContractGet {
 
         if(Contract.SObjectType.getDescribe().isAccessible()){
             contractsListToReturn = [SELECT Id,
-                                            Name
+                                            Name,
+                                            AccountId
                                      FROM Contract
                                      WHERE AccountId = :AccountId
                                     ];
