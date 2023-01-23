@@ -8,7 +8,7 @@
 @isTest
 public with sharing class OrderGet_Test {
 
-    String accountName = 'AccountName-0';
+    private static String accountName = 'AccountName-0';
 
     @TestSetup
     static void setupOrderGet(){
@@ -22,14 +22,14 @@ public with sharing class OrderGet_Test {
 
         // get sObjects for Test
         Account accountForThisTest = accountsList[0];
-        Contract contractForThisTest = ContractGet.getContractsOfAccount(Id AccountId);
-        Pricebook2 pricebookForThisTest = Pricebook2DataFactory.getPriceBook2ByName(pricebook2Name);
+        List<Contract> contractForThisTest = ContractGet.getContractsOfAccount(accountForThisTest.Id);
+        Pricebook2 pricebookForThisTest = Pricebook2Get.getPriceBook2ListByName('France Price Book')[0];
 
         // create order
         Order orderConstructed = new Order(
-            Name = orderName,
+            Name = 'orderName',
             AccountId = accountForThisTest.Id,
-            ContractId = contractForThisTest.Id,
+            ContractId = contractForThisTest[0].Id,
             Status = 'Draft',
             EffectiveDate = Date.today(),
             // essential for the creation of OrderItem
@@ -49,4 +49,16 @@ public with sharing class OrderGet_Test {
 
         System.assertEquals(orderListForThisTest.size(), 1, 'OrderGet.getOrdersAll should return one order.');
     }
+    
+    /*@isTest
+    static void testGetOrdersWhereStatusActivated(){
+        List<Order> orderListToUpdate = OrderGet.getOrdersWhereStatusActivated();
+        // TODO OrderUpdate
+
+        Test.startTest();
+        List<Order> orderListForThisTest = OrderGet.getOrdersWhereStatusActivated();
+        Test.stopTest();
+        System.debug('orderListForThisTest ' +orderListForThisTest);
+        System.assertEquals('Activated', orderListForThisTest[0].Status, 'OrderGet.getOrdersWhereStatusActivated should return at least one order with the field Status value Activated.');
+    }*/
 }

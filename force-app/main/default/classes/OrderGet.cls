@@ -8,19 +8,57 @@
 public with sharing class OrderGet {
 
     public static List<Order> getOrdersAll(){
-        List<Order> orderList = [SELECT Id, 
-                                        AccountId,
-                                        Status
-                                  FROM Order];
+
+        List<Order> orderList = new List<Order>();
+
+        if(Order.SObjectType.getDescribe().isAccessible() &&
+        Schema.SObjectType.Order.fields.Name.isAccessible() &&
+        Schema.SObjectType.Order.fields.Status.isAccessible()){
+            orderList = [SELECT Id, 
+                                AccountId,
+                                Status
+                        FROM Order];
+        } else {
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an Order reccord.');
+        }
         return orderList;
     }
 
     public static List<Order> getOrdersWhereStatusActivated(){
-        List<Order> orderList = [SELECT Id, 
-                                        AccountId,
-                                        Status
-                                  FROM Order
-                                  WHERE Status = :'Activated'];
+
+        List<Order> orderList = new List<Order>();
+
+        if(Order.SObjectType.getDescribe().isAccessible() &&
+        Schema.SObjectType.Order.fields.Name.isAccessible() &&
+        Schema.SObjectType.Order.fields.Status.isAccessible()){
+            orderList = [SELECT Id, 
+                                AccountId,
+                                Status
+                        FROM Order
+                        WHERE Status = :'Activated'];
+        } else {
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an Order reccord.');
+        }
         return orderList;
+    }
+
+    public static List<Order> getOrderByAccountAndContract(Id accountId, Id contractId){
+        List<Order> orderList = new List<Order>();
+
+        if(Order.SObjectType.getDescribe().isAccessible() &&
+        Schema.SObjectType.Order.fields.Name.isAccessible() &&
+        Schema.SObjectType.Order.fields.Status.isAccessible()){
+            orderList = [SELECT Id, 
+                                AccountId,
+                                Status,
+                                ContractId
+                        FROM Order
+                        WHERE AccountId = :accountId
+                        AND ContractId = :contractId];
+        } else {
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an Order reccord.');
+        }
+        return orderList;
+        
     }
 }
