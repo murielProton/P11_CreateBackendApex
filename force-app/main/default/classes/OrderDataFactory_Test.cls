@@ -33,7 +33,7 @@ public with sharing class OrderDataFactory_Test {
         Contract contractForThisTest = contractListForThisTest[0];
 
         Test.startTest();
-        Order orderForThisTest = OrderDataFactory.constructOneOrder(orderName, accountForThisTest.ID, contractForThisTest.ID, pricebookForThisTest);
+        Order orderForThisTest = OrderDataFactory.constructOneOrder(orderName, accountForThisTest.ID, contractForThisTest.ID, pricebookForThisTest.Id);
         Test.stopTest();
 
         System.assertEquals( 'Draft', orderForThisTest.Status, 'OrderDataFactory.constructOneOrder should create one order.');
@@ -42,27 +42,28 @@ public with sharing class OrderDataFactory_Test {
     @isTest
     static void testCreateOrdersListForEachContract(){
         //TODO correct this methode
-        Pricebook2 pricebookForThisTest = Pricebook2Get.getPriceBook2ListByName(pricebook2Name)[0];
         List<Account> accountListForTest = AccountGet.getAccountsAll();
         Account accountForThisTest = accountListForTest[0];
-        List<Contract> contractsListToUpdate = ContractGet.getContractsAll();
-        // The Order must have at least one Product, so we can change Order.Status to Ordered
-        // Link these accounts to some products = for each accounts create a contract + create pricebook custom + create pricebook standard + create products + create price book entry + create order
         // for each accounts create a contract 
-        ContractUpdate.updateContractsStatusToActivated(contractsListToUpdate);
-        
-        System.debug('Pricebook '+ pricebookForThisTest);
-        System.debug('accountForThisTest '+ accountForThisTest);
+        ContractDataFactory.createContractsList(accountListForTest);
+        // Create Product2
+        Product2DataFactory.createProduct2();
+        // Now make sure the Salesforce process doese create a standard Pricebook2
+        Pricebook2 pricebookForThisTest = Pricebook2Get.getPriceBook2ListByName(pricebook2Name)[0];
+        Product2 product2ForThisTest = Product2Get.getProduct2All()[0];
+        // Process needs an entry in th Pricebook2 Standard = true, first ;
+        PricebookEntryDataFactory.createPriceBookEntryForPricebookStandard(product2ForThisTest);
+        // then PricebookEntry for normal Pricebook2 can be inserted.
+        PricebookEntryDataFactory.createPriceBookEntry(pricebookForThisTest, product2ForThisTest);
+        // get contracts List we just inserted
+        List<Contract> contractListToCreateOrders = ContractGet.getContractsAll();
 
-        List<Contract> contractListForForTest = ContractGet.getContractsAll();
-        System.debug('contractListForForTest '+ contractListForForTest);
         Test.startTest();
-        OrderDataFactory.createOrdersListForEachContract(contractListForForTest, pricebookForThisTest);
+        OrderDataFactory.createOrdersListForEachContract(contractListToCreateOrders, pricebookForThisTest);
         Test.stopTest();
 
         List<Order> orderListForThisTest = OrderGet.getOrdersAll();
-        System.debug('orderListForThisTest '+ orderListForThisTest);
 
-        System.assertEquals(1, orderListForThisTest.size(), 'OrderDataFactory.createOrdersListForEachContract should reate a list of records on Order.');
+        System.assertEquals(2, orderListForThisTest.size(), 'OrderDataFactory.createOrdersListForEachContract should reate a list of records on Order.');
     }
 }

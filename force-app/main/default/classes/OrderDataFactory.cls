@@ -6,10 +6,10 @@
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 public with sharing class OrderDataFactory {
-    
+    // Idée passer les paramettres  dans un array
     public static String orderName = 'Telepathy-';
 
-    public static Order constructOneOrder(String orderName, Id accountID, Id contractID , PriceBook2 pricebookForThisTest){
+    public static Order constructOneOrder(String orderName, Id accountID, Id contractID, Id pricebookId){
         Order orderConstructed = new Order(
             Name = orderName,
             AccountId = accountID,
@@ -17,7 +17,7 @@ public with sharing class OrderDataFactory {
             Status = 'Draft',
             EffectiveDate = Date.today(),
             // essential for the creation of OrderItem
-            Pricebook2Id =  pricebookForThisTest.Id
+            Pricebook2Id =  pricebookId
             //TotalAmount = not writable This is Why Order links to a Product2 with OrderItem
         );
         return orderConstructed;
