@@ -25,6 +25,7 @@ SobjectNameGet -> contains all the methodes used to get reccords, using SOQL.
 SobjectNameTypeFilter -> contains all the methodes to filter throught the cited type.
 SobjectNameDataFactory -> contains all the methodes that generates records for the tests.
 All tests methodes begin by test.
+setupClassName -> design pattern for all setup methode begining a test class
 # CRUD DML
 Check CRUD before DML operation documentation :
 https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_perms_enforcing.htm
