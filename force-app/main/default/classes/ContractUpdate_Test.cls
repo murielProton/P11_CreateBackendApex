@@ -11,7 +11,7 @@ public with sharing class ContractUpdate_Test {
     String accountName = 'AccountName-0';
     
     @TestSetup
-    static void setupForContract_TestDataFactory_Test(){
+    static void setupContractUpdate(){
         //Create an Account
         AccountDataFactory.createAccountsList(1);
         List<Account> accountsListForThisTest = AccountGet.getAccountsAll();

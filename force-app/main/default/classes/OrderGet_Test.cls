@@ -8,10 +8,10 @@
 @isTest
 public with sharing class OrderGet_Test {
 
-    String accountName = '';
+    String accountName = 'AccountName-0';
 
     @TestSetup
-    static void setupForOrderGet(){
+    static void setupOrderGet(){
         //Create an Account
         AccountDataFactory.createAccountsList(1);
         List<Account> accountsList = AccountGet.getAccountsAll();

@@ -13,7 +13,7 @@ public with sharing class OrderDataFactory_Test {
     private static String orderName = '042';
 
     @TestSetup
-    static void setupForOrderDataFactory_test(){
+    static void setupOrderDataFactory(){
         //Create a List of Accounts
         AccountDataFactory.createAccountsList(1);
         List<Account> accountListForTest = AccountGet.getAccountsAll();

@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-16-2023
+ * @last modified on  : 01-23-2023
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 
@@ -12,7 +12,7 @@ public with sharing class Pricebook2Get_Test {
     private static String pricebook2Name = 'France Price Book';
 
     @TestSetup
-    static void setupForTestGetPricebook2(){
+    static void setupPricebook2Get(){
         Pricebook2DataFactory.createPricebook2();
     }
 

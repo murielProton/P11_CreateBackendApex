@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-15-2023
+ * @last modified on  : 01-23-2023
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 @isTest
@@ -11,7 +11,7 @@ public with sharing class ContractDataFactory_Test {
     private static String accountName = 'accountName-0';
 
     @TestSetup
-    static void setupForContract(){
+    static void setupContractDataFactory(){
         //Create an Account
         AccountDataFactory.createAccountsList(5);
         List<Account> accountsList = AccountGet.getAccountsAll();
