@@ -2,12 +2,10 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-16-2023
+ * @last modified on  : 01-23-2023
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 public with sharing class Pricebook2Get {
-
-    private static String pricebook2Name = 'France Price Book';
 
     public static List<Pricebook2> getPriceBook2ListByName(String pricebookName){
 
