@@ -13,10 +13,6 @@ public with sharing class OrderFilter {
 
             for(Order orderCurentNew : orderListNew){
                 Order orderCurentOld = orderMapOld.get(orderCurentNew.Id);
-                System.debug('orderCurentOld.Status => '+orderCurentOld.Status);
-                System.debug('orderCurentOld.Status == "Draft" => '+(orderCurentOld.Status == 'Draft'));
-                System.debug('orderCurentOld.Status.equals("Draft") => '+(orderCurentOld.Status.equals('Draft')));
-                System.debug('orderCurentNew.Status => '+orderCurentNew.Status);
                 if( orderCurentOld.Status == 'Draft'
                     && orderCurentNew.Status == 'Activated'){
                         orderSetToReturn.add(orderCurentNew);
@@ -24,5 +20,36 @@ public with sharing class OrderFilter {
             }
 
         return orderSetToReturn;
+    }
+
+    public static Map<Id, Order> orderListFilterOrdersLinkedToProduct2(Set<Order> orderSet) {
+        // TODO returns a Map of OrderItem ID and Order
+        Map<Id, Order> orderItemIdOrderMap = new Map<Id, Order>();
+        //TODO Get OrderItem WHERE Order ID
+        //TODO transforme it into a Map
+            for(Order orderCurent : orderSet){
+                OrderItem orderCurentOld = orderItemMap.get(orderCurent.Id);
+                if( orderCurentOld.Status == OrderId
+                    && orderCurentNew.Status == 'Activated'){
+                        orderSetToReturn.add(orderCurentNew);
+                    }
+            }
+
+        return orderMapToReturn;
+    }
+
+    public static Map<Id, Order> orderListFilterOrdersLinkedToProduct2(Set<Order> orderSet) {
+        // TODO returns a Map of ProductId and Order
+        /*Map<Id, Order> orderMapToReturn = new Map<Id, Order>();
+
+            for(Order orderCurentNew : orderListNew){
+                Order orderCurentOld = orderMapOld.get(orderCurentNew.Id);
+                if( orderCurentOld.Status == 'Draft'
+                    && orderCurentNew.Status == 'Activated'){
+                        orderSetToReturn.add(orderCurentNew);
+                    }
+            }*/
+
+        return orderMapToReturn;
     }
 }
