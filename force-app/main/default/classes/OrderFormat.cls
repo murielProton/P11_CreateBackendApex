@@ -7,7 +7,7 @@
 **/
 public with sharing class OrderFormat {
 
-    public static Map<Id, Order> orderFormatListToMap(List<Order> orderList) {
+    public static Map<Id, Order> transformListToMap(List<Order> orderList) {
         Map<Id, Order> orderMapToReturn = new Map<Id, Order>();
         for(Order orderCurent : orderList){
             if(! orderMapToReturn.containsKey(orderCurent.Id)){

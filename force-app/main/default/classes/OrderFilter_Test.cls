@@ -51,7 +51,7 @@ public with sharing class OrderFilter_Test {
         // get a list of Orders records
         List<Order> orderListOld = OrderGet.getOrdersAll();
         //Convert orderListOld into a map
-        Map<Id, Order> orderMapOld = OrderFormat.orderFormatListToMap(orderListOld);
+        Map<Id, Order> orderMapOld = OrderFormat.transformListToMap(orderListOld);
 
         //OrderItem links product to Order 
         // for each Orders create an OrderItem

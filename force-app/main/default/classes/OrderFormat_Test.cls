@@ -12,7 +12,7 @@ public with sharing class OrderFormat_Test {
     private static String orderName = 'Telepathy-';
 
     @isTest
-    public static void testOrderFormatListToMap() {
+    public static void testTransformListToMap() {
         //Create a List of Accounts
         AccountDataFactory.createAccountsList(3);
         List<Account> accountListForTest = AccountGet.getAccountsAll();
@@ -40,9 +40,9 @@ public with sharing class OrderFormat_Test {
         List<Order> orderListForThisTest = OrderGet.getOrdersAll();
         
         Test.startTest();
-        Map<Id, Order> orderMapToTest = OrderFormat.orderFormatListToMap(orderListForThisTest);
+        Map<Id, Order> orderMapToTest = OrderFormat.transformListToMap(orderListForThisTest);
         Test.stopTest();
 
-        System.assertEquals(orderListForThisTest.size(), orderMapToTest.size(), 'OrderFilter.orderFormatListToMap should return a map of the same size as the List it received as parameter.');
+        System.assertEquals(orderListForThisTest.size(), orderMapToTest.size(), 'OrderFilter.transformListToMap should return a map of the same size as the List it received as parameter.');
     }
 }

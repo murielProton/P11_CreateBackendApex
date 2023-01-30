@@ -47,4 +47,24 @@ public with sharing class OrderItemGet {
         return orderItemList;
         
     }
+    public static List<OrderItem> getOrderItemWhereProduct2AndOrderExist(){
+
+        List<OrderItem> orderItemList = new List<OrderItem>();
+
+        if(OrderItem.SObjectType.getDescribe().isAccessible() &&
+        Schema.SObjectType.OrderItem.fields.Product2Id.isAccessible() &&
+        Schema.SObjectType.OrderItem.fields.OrderId.isAccessible()){
+            orderItemList = [SELECT Id, 
+                                OrderId,
+                                Product2Id,
+                                PricebookEntryId
+                        FROM OrderItem
+                        WHERE OrderId != null
+                        AND Product2Id != null];
+        } else {
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an OrderItem reccord.');
+        }
+        return orderItemList;
+        
+    }
 }

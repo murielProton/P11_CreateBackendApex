@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-23-2023
+ * @last modified on  : 01-30-2023
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 @isTest
@@ -62,5 +62,23 @@ public with sharing class OrderItemGet_Test {
         Test.stopTest();
 
         System.assertEquals(1, orderItemsListToTest.size(), 'OrderItemGet.getOrderItemByOrderProductPricebookEntry should return at least one reccord.');
+    }
+    @isTest
+    static void testGetOrderItemWhereProduct2AndOrderExist(){
+        //Get parametters for the parametters of this test
+        Id accountIdForThisTest = AccountGet.getAccountsAll()[0].Id;
+        Contract contractListToCreateOrders = ContractGet.getContractsOfAccount(accountIdForThisTest)[0];
+        Pricebook2 pricebookForThisTest = Pricebook2Get.getPriceBook2ListByName(pricebook2Name)[0];
+        Product2 product2ForThisTest = Product2Get.getProduct2All()[0];
+        //get parametters for the test
+        List<Order> ordersListForThisTest = OrderGet.getOrderByAccountAndContract(accountIdForThisTest, contractListToCreateOrders.Id);
+        Order orderForThisTest = ordersListForThisTest[0];
+        PricebookEntry pricebookEntryForThisTest = PricebookEntryGet.getPricebookEntryByPricebook2AndProduct2(pricebookForThisTest.Id, product2ForThisTest.Id)[0];
+
+        Test.startTest();
+        List<OrderItem> orderItemsListToTest = OrderItemGet.getOrderItemWhereProduct2AndOrderExist();
+        Test.stopTest();
+
+        System.assertEquals(1, orderItemsListToTest.size(), 'OrderItemGet.getOrderItemWhereProduct2AndOrderExist should return at least one reccord.');
     }
 }

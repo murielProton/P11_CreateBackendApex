@@ -25,7 +25,8 @@ public with sharing class OrderFilter {
     public static Map<Id, Order> orderListFilterOrdersLinkedToProduct2(Set<Order> orderSet) {
         // TODO returns a Map of OrderItem ID and Order
         Map<Id, Order> orderItemIdOrderMap = new Map<Id, Order>();
-        //TODO Get OrderItem WHERE Order ID
+        // Get OrderItem WHERE Order ID
+        List<OrderItem> orderItemList = OrderItemGet.getOrderItemWhereProduct2AndOrderExist();
         //TODO transforme it into a Map
             for(Order orderCurent : orderSet){
                 OrderItem orderCurentOld = orderItemMap.get(orderCurent.Id);
