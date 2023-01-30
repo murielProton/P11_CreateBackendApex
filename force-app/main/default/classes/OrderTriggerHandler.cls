@@ -6,8 +6,11 @@
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 public with sharing class OrderTriggerHandler extends TriggerHandler {
-    List<Order> orderListNew =(List<Order>)Trigger.new;
     List<Order> orderListOld =(List<Order>)Trigger.old;
+    List<Order> orderListNew =(List<Order>)Trigger.new;
+    
+    Map<Id, Order> orderMapOld = (Map<Id, Order>)Trigger.oldMap;
+    Map<Id, Order> orderMapNew = (Map<Id, Order>)Trigger.newMap;
 
     public override void beforeUpdate() {
         /*TODO Add a methode from OrderTrigerHelper That doese :

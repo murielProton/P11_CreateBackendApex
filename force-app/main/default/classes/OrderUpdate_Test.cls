@@ -68,8 +68,9 @@ public with sharing class OrderUpdate_Test {
 
     @isTest
     static void testUpdateOrdersStatusToActivated(){
-        //Todo ligne 367 of P9 Oerdatafactory
+        
         List<Order> orderListForTest = OrderGet.getOrdersAll();
+        
         Test.startTest();
         OrderUpdate.updateOrdersStatusToActivated(orderListForTest);
         Test.stopTest();
