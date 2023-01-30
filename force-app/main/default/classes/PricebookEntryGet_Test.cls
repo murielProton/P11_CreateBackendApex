@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-23-2023
+ * @last modified on  : 01-30-2023
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 @isTest
@@ -26,14 +26,14 @@ public with sharing class PricebookEntryGet_Test {
         Product2DataFactory.createProduct2();
         // Now make sure the Salesforce process doese create a standard Pricebook2
         List<Pricebook2> pricebookForThisTest = Pricebook2Get.getPriceBook2ListByName(pricebook2Name);
-        List<Product2> product2ForThisTest = Product2Get.getProduct2ByName(product2Name);        
+        List<Product2> product2ForThisTest = Product2Get.getProduct2ListByName(product2Name);        
     }
 
     @isTest
     static void testGetPricebookEntryByPricebook2AndProduct2(){
         //gest sObjects for the Test
         Pricebook2 pricebookForThisTest = Pricebook2Get.getPriceBook2ListByName(pricebook2Name)[0];
-        Product2 product2ForThisTest = Product2Get.getProduct2ByName(product2Name)[0];
+        Product2 product2ForThisTest = Product2Get.getProduct2ListByName(product2Name)[0];
 
         PricebookEntryDataFactory.createPriceBookEntryForPricebookStandard(product2ForThisTest);
 
