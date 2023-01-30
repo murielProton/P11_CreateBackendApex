@@ -18,4 +18,12 @@ public with sharing class OrderItemDataFactory {
         return orderItemToInsert;
     }
 
+    public static void createOrderItemsList(List<Order> orderList, Id product2Id, Id pricebookEntryId){
+        List<OrderItem> orderItemsList = new List<OrderItem>();
+        for(Order orderCurent : orderList){
+            //(Order orderForThisTest, Product2 product2ForThisTest, PricebookEntry pricebookEntryForThisTest)
+            orderItemsList.add(OrderItemDataFactory.constructOneOrderItem(orderCurent.Id, product2Id, pricebookEntryId));
+        }
+        insert orderItemsList;
+    }
 }

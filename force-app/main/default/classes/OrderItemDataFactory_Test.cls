@@ -58,5 +58,25 @@ public with sharing class OrderItemDataFactory_Test {
 
         System.assertEquals(240, orderItemToTest.UnitPrice, 'OrderItemDataFactory.constructOneOrderItem should return one OrderItem.');
     }
+    @isTest
+    static void testCreateOrderItemsList(){
+        // get sObjects to run the test
+        Id accountId = AccountGet.getAccount(accountName).Id;
+        Id contractId = ContractGet.getContractsOfAccount(accountId)[0].Id;
+        List<Order> orderListForTest = OrderGet.getOrderByAccountAndContract(accountId, contractId);
+        
+        Product2 product2ForThisTest = Product2Get.getProduct2All()[0];//warning
+        Pricebook2 pricebookForThisTest = Pricebook2Get.getPriceBook2ListByName(pricebook2Name)[0];//warning
 
+        List<PricebookEntry> pricebookEntryListForThisTest = PricebookEntryGet.getPricebookEntryByPricebook2AndProduct2(pricebookForThisTest.Id, product2ForThisTest.Id);
+
+        Test.startTest();
+        OrderItemDataFactory.createOrderItemsList(orderListForTest, product2ForThisTest.Id, pricebookEntryListForThisTest[0].Id);
+        Test.stopTest();
+
+        List<OrderItem> orderItemListToTest = OrderItemGet.getOrderItemListAll();
+
+        System.assertEquals(1, orderItemListToTest.size(), 'OrderItemDataFactory.createOrderItemsList should create at least one OrderItem.');
+    }
+    
 }
