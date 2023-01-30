@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-23-2023
+ * @last modified on  : 01-30-2023
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 @isTest
@@ -27,7 +27,7 @@ public with sharing class OrderGet_Test {
 
         // create order
         Order orderConstructed = new Order(
-            Name = 'orderName',
+            Name = 'Telepathy',
             AccountId = accountForThisTest.Id,
             ContractId = contractForThisTest[0].Id,
             Status = 'Draft',

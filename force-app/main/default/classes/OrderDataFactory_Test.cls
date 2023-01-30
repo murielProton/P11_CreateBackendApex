@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-23-2023
+ * @last modified on  : 01-30-2023
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 @isTest
@@ -10,7 +10,7 @@ public with sharing class OrderDataFactory_Test {
 
     private static String accountName = 'accountName-0';
     private static String pricebook2Name = 'France Price Book';
-    private static String orderName = '042';
+    public static String orderName = 'Telepathy-';
 
     @TestSetup
     static void setupOrderDataFactory(){
@@ -41,7 +41,7 @@ public with sharing class OrderDataFactory_Test {
 
     @isTest
     static void testCreateOrdersListForEachContract(){
-        //TODO correct this methode
+        
         List<Account> accountListForTest = AccountGet.getAccountsAll();
         Account accountForThisTest = accountListForTest[0];
         // for each accounts create a contract 

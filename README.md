@@ -22,7 +22,7 @@ https://github.com/cfpb/salesforce-docs/blob/master/_pages/Salesforce-Naming-Con
 SobjectNameForBatch -> contains all the methodes used in the Batch.
 SobjectNameFormat -> contains all the methodes used to convert a type to an other type. (for example Lists into Sets)
 SobjectNameGet -> contains all the methodes used to get reccords, using SOQL.
-SobjectNameTypeFilter -> contains all the methodes to filter throught the cited type.
+SobjectNameFilter -> contains all the methodes to filter throught the cited type. 
 SobjectNameDataFactory -> contains all the methodes that generates records for the tests.
 All tests methodes begin by test.
 setupClassName -> design pattern for all setup methode begining a test class
