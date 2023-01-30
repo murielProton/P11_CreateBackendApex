@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-23-2023
+ * @last modified on  : 01-30-2023
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 @isTest
@@ -15,7 +15,7 @@ public with sharing class OrderItemDataFactory_Test {
     private static String orderName = 'Telepathy-';
 
     @TestSetup
-    static void setupForOrderItemDataFactory(){
+    static void setupOrderItemDataFactory(){
         //Create an Account
         AccountDataFactory.createAccountsList(5);
         List<Account> accountsListForContract = AccountGet.getAccountsAll();
@@ -58,4 +58,5 @@ public with sharing class OrderItemDataFactory_Test {
 
         System.assertEquals(240, orderItemToTest.UnitPrice, 'OrderItemDataFactory.constructOneOrderItem should return one OrderItem.');
     }
+
 }
