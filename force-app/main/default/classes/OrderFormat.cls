@@ -18,19 +18,19 @@ public with sharing class OrderFormat {
     }
 
     public static Set<Order> transformListToSet(List<Order> orderList) {
-        Set<Order> orderSetToReturn = new Set<Order>();
-        for(Order orderCurent : orderList){
-            orderSetToReturn.add(orderCurent);
-        }
-        return orderSetToReturn;
+        return new Set<Order>(orderList);
     }
 
     public static List<Order> transformSetToList(Set<Order> orderSet) {
-        List<Order> orderListToReturn = new List<Order>();
+        return new List<Order>(orderSet);
+    }
+
+    public static Map<Id, Order> transformSetToMap(Set<Order> orderSet) {
+        Map<Id, Order> orderMapToReturn = new Map<Id, Order>();
         for(Order orderCurent : orderSet){
-            orderListToReturn.add(orderCurent);
+            orderMapToReturn.put(orderCurent.Id, orderCurent);
         }
-        return orderListToReturn;
+        return orderMapToReturn;
     }
 
 }

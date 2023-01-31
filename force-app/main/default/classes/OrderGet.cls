@@ -73,8 +73,7 @@ public with sharing class OrderGet {
             orderList = [SELECT Id, 
                                 AccountId,
                                 Status,
-                                ContractId,
-                                Pricebook2Id
+                                ContractId
                         FROM Order
                         WHERE Pricebook2Id = Null];
         } else {

@@ -7,10 +7,8 @@
 **/
 public with sharing class OrderFilter {
 
-    public static Set<Order> orderListFilterStatusDraftToActivated(Map<Id, Order> orderMapOld, List<Order> orderListNew) {
-
+    public static List<Order> orderListFilterStatusDraftToActivated(Map<Id, Order> orderMapOld, List<Order> orderListNew) {
         Set<Order> orderSetToReturn = new Set<Order>();
-
             for(Order orderCurentNew : orderListNew){
                 Order orderCurentOld = orderMapOld.get(orderCurentNew.Id);
                 if( orderCurentOld.Status == 'Draft'
@@ -18,13 +16,12 @@ public with sharing class OrderFilter {
                         orderSetToReturn.add(orderCurentNew);
                     }
             }
-
-        return orderSetToReturn;
+        return new List<Order>(orderSetToReturn);
     }
 
-    public static Set<Order> orderListFilterLinkedToProduct2(Set<Order> orderSet) {
+    public static List<Order> orderListFilterLinkedToProduct2(List<Order> orderList) {
         //Declare the Set to return
-        Set<Order> orderSetToReturn = new Set<Order>();
+        List<Order> orderListToReturn = new List<Order>();
 
         // return a List of OrderItems when the OrderItem is linked to a Product2 and an Order
         List<OrderItem> orderItemList = OrderItemGet.getOrderItemWhereProduct2AndOrderExist();
@@ -32,28 +29,11 @@ public with sharing class OrderFilter {
         Map<Id, OrderItem> orderItemMap = OrderItemFormat.transformListToMapOrderIdOrderItem(orderItemList);
 
         // transforme it into a Set of Order
-            for(Order orderCurent : orderSet){
+            for(Order orderCurent : orderList){
                 OrderItem orderCurentOld = orderItemMap.get(orderCurent.Id);
-                orderSetToReturn.add(orderCurent);
+                orderListToReturn.add(orderCurent);
             }
-        return orderSetToReturn;
+        return orderListToReturn;
     }
 
-    public static Set<Order> orderListFilterOrdersWithNOProduct2(Set<Order> orderSet) {
-       // TODO returns a Set of orders that are not linked to a product
-       //Declare the Set to return
-       Set<Order> orderSetToReturn = new Set<Order>();
-
-       // return a List of OrderItems when the OrderItem is linked to an Order, BUT NOT to a Product2 
-       List<OrderItem> orderItemList = OrderItemGet.getOrder/*TODO*/();
-       // TODO convert the list to a Map<OrderItem.OrderId, OrderItem>
-       Map<Id, OrderItem> orderItemMap = OrderItemFormat.transformListToMapOrderIdOrderItem(orderItemList);
-
-       // TODO transforme it into a Set Product2.Id Order
-           for(Order orderCurent : orderSet){
-               OrderItem orderCurentOld = orderItemMap.get(orderCurent.Id);
-               orderSetToReturn.add(orderCurent);
-           }
-       return orderSetToReturn;
-    }
 }
