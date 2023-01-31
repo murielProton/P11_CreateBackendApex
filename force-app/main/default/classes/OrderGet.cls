@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-23-2023
+ * @last modified on  : 01-31-2023
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 public with sharing class OrderGet {
@@ -55,6 +55,28 @@ public with sharing class OrderGet {
                         FROM Order
                         WHERE AccountId = :accountId
                         AND ContractId = :contractId];
+        } else {
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an Order reccord.');
+        }
+        return orderList;
+        
+    }
+    /* as an OrderItem cannot be created without an Procuct2, 
+    and a PricebookEntry cannot be created without a Product2 and a Pricebook2,
+    an Order without a Pricebook2 has no Product attached.*/
+    public static List<Order> getOrderWhereNOPricebook2(){
+        List<Order> orderList = new List<Order>();
+
+        if(Order.SObjectType.getDescribe().isAccessible() &&
+        Schema.SObjectType.Order.fields.Name.isAccessible() &&
+        Schema.SObjectType.Order.fields.Status.isAccessible()){
+            orderList = [SELECT Id, 
+                                AccountId,
+                                Status,
+                                ContractId,
+                                Pricebook2Id
+                        FROM Order
+                        WHERE Pricebook2Id = Null];
         } else {
             throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an Order reccord.');
         }

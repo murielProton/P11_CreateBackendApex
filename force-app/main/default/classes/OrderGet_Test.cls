@@ -2,13 +2,14 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-30-2023
+ * @last modified on  : 01-31-2023
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 @isTest
 public with sharing class OrderGet_Test {
 
     private static String accountName = 'AccountName-0';
+    private static String orderName = 'Telepathy';
 
     @TestSetup
     static void setupOrderGet(){
@@ -27,7 +28,7 @@ public with sharing class OrderGet_Test {
 
         // create order
         Order orderConstructed = new Order(
-            Name = 'Telepathy',
+            Name = orderName,
             AccountId = accountForThisTest.Id,
             ContractId = contractForThisTest[0].Id,
             Status = 'Draft',
@@ -50,15 +51,25 @@ public with sharing class OrderGet_Test {
         System.assertEquals(orderListForThisTest.size(), 1, 'OrderGet.getOrdersAll should return one order.');
     }
     
-    /*@isTest
-    static void testGetOrdersWhereStatusActivated(){
-        List<Order> orderListToUpdate = OrderGet.getOrdersWhereStatusActivated();
-        // TODO OrderUpdate
+    @isTest
+    static void testGetOrderWhereNOPricebook2(){
+        List<Account> accountsList = AccountGet.getAccountsAll();
+        List<Contract> contractForThisTest = ContractGet.getContractsOfAccount(accountsList[0].Id);
+        Order orderConstructed = new Order(
+            Name = orderName+'-'+accountName,
+            AccountId = accountsList[0].Id,
+            ContractId = contractForThisTest[0].Id,
+            Status = 'Draft',
+            EffectiveDate = Date.today()
+        );
+        insert orderConstructed;
 
         Test.startTest();
-        List<Order> orderListForThisTest = OrderGet.getOrdersWhereStatusActivated();
+        List<Order> orderListToTest = OrderGet.getOrderWhereNOPricebook2();
         Test.stopTest();
-        System.debug('orderListForThisTest ' +orderListForThisTest);
-        System.assertEquals('Activated', orderListForThisTest[0].Status, 'OrderGet.getOrdersWhereStatusActivated should return at least one order with the field Status value Activated.');
-    }*/
+
+        System.debug('orderListForThisTest ' +orderListToTest);
+
+        System.assertEquals(1, orderListToTest.size(), 'OrderGet.getOrderWhereNOPricebook2 should return at least one order without a Pricebook2 attached.');
+    }
 }
