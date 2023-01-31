@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-30-2023
+ * @last modified on  : 01-31-2023
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 @isTest
@@ -11,7 +11,7 @@ public with sharing class OrderItemFormat_Test {
     private static String orderName = 'Telepathy-';
 
     @isTest
-    public static void testTransformListToMap() {
+    public static void testtransformListToMapOrderIdOrderItem() {
         //Create an Account
         AccountDataFactory.createAccountsList(5);
         List<Account> accountsListForContract = AccountGet.getAccountsAll();
@@ -45,9 +45,9 @@ public with sharing class OrderItemFormat_Test {
 
         
         Test.startTest();
-        Map<Id, OrderItem> orderItemMapToTest = OrderItemFormat.transformListToMap(orderItemListForThisTest);
+        Map<Id, OrderItem> orderItemMapToTest = OrderItemFormat.transformListToMapOrderIdOrderItem(orderItemListForThisTest);
         Test.stopTest();
 
-        System.assertEquals(orderItemListForThisTest.size(), orderItemMapToTest.size(), 'OrderItemFormat.transformListToMap should return a map of the same size as the List it received as parameter.');
+        System.assertEquals(orderItemListForThisTest.size(), orderItemMapToTest.size(), 'OrderItemFormat.transformListToMapOrderIdOrderItem should return a map of the same size as the List it received as parameter.');
     }
 }
