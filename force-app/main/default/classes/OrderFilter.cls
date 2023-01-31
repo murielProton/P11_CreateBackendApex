@@ -31,7 +31,7 @@ public with sharing class OrderFilter {
         // convert the list to a Map<OrderItem.OrderId, OrderItem>
         Map<Id, OrderItem> orderItemMap = OrderItemFormat.transformListToMapOrderIdOrderItem(orderItemList);
 
-        // transforme it into a Map Product2.Id Order
+        // transforme it into a Set of Order
             for(Order orderCurent : orderSet){
                 OrderItem orderCurentOld = orderItemMap.get(orderCurent.Id);
                 orderSetToReturn.add(orderCurent);
@@ -39,18 +39,21 @@ public with sharing class OrderFilter {
         return orderSetToReturn;
     }
 
-    /*public static Map<Id, Order> orderListFilterOrdersLinkedToProduct2(Set<Order> orderSet) {
-        // TODO returns a Map of ProductId and Order
-        Map<Id, Order> orderMapToReturn = new Map<Id, Order>();
+    public static Set<Order> orderListFilterOrdersWithNOProduct2(Set<Order> orderSet) {
+       // TODO returns a Set of orders that are not linked to a product
+       //Declare the Set to return
+       Set<Order> orderSetToReturn = new Set<Order>();
 
-            for(Order orderCurentNew : orderListNew){
-                Order orderCurentOld = orderMapOld.get(orderCurentNew.Id);
-                if( orderCurentOld.Status == 'Draft'
-                    && orderCurentNew.Status == 'Activated'){
-                        orderSetToReturn.add(orderCurentNew);
-                    }
-            }
+       // return a List of OrderItems when the OrderItem is linked to an Order, BUT NOT to a Product2 
+       List<OrderItem> orderItemList = OrderItemGet.getOrder/*TODO*/();
+       // TODO convert the list to a Map<OrderItem.OrderId, OrderItem>
+       Map<Id, OrderItem> orderItemMap = OrderItemFormat.transformListToMapOrderIdOrderItem(orderItemList);
 
-        return orderMapToReturn;
-    }*/
+       // TODO transforme it into a Set Product2.Id Order
+           for(Order orderCurent : orderSet){
+               OrderItem orderCurentOld = orderItemMap.get(orderCurent.Id);
+               orderSetToReturn.add(orderCurent);
+           }
+       return orderSetToReturn;
+    }
 }

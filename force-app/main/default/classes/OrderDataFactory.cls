@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-23-2023
+ * @last modified on  : 01-31-2023
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 public with sharing class OrderDataFactory {
@@ -12,12 +12,12 @@ public with sharing class OrderDataFactory {
     public static Order constructOneOrder(String orderName, Id accountID, Id contractID, Id pricebookId){
         Order orderConstructed = new Order(
             Name = orderName,
-            AccountId = accountID,
+            AccountId = accountID, //Required
             ContractId = contractID,
             Status = 'Draft',
             EffectiveDate = Date.today(),
             // essential for the creation of OrderItem
-            Pricebook2Id =  pricebookId
+            Pricebook2Id =  pricebookId //Required
             //TotalAmount = not writable This is Why Order links to a Product2 with OrderItem
         );
         return orderConstructed;

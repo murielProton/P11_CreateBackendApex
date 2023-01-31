@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-30-2023
+ * @last modified on  : 01-31-2023
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 public with sharing class OrderItemDataFactory {
@@ -13,7 +13,7 @@ public with sharing class OrderItemDataFactory {
             Quantity = 24,
             UnitPrice = 240,
             Product2Id = product2Id,
-            PricebookEntryId = pricebookEntryId
+            PricebookEntryId = pricebookEntryId //Required
         );
         return orderItemToInsert;
     }
@@ -23,7 +23,11 @@ public with sharing class OrderItemDataFactory {
         for(Order orderCurent : orderList){
             //(Order orderForThisTest, Product2 product2ForThisTest, PricebookEntry pricebookEntryForThisTest)
             orderItemsList.add(OrderItemDataFactory.constructOneOrderItem(orderCurent.Id, product2Id, pricebookEntryId));
+        }        
+        if (Schema.sObjectType.OrderItem.fields.OrderId.isCreateable() == false) {
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert an OrderItem reccord.');
+        }else{
+            insert orderItemsList;
         }
-        insert orderItemsList;
     }
 }

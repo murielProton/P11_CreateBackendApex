@@ -76,7 +76,8 @@ public with sharing class OrderTriggerHelper_Test {
         Test.startTest();
         List<Order> orderList = OrderTriggerHelper.getOrderListToUpdate(orderMapOld, orderListNew);
         Test.stopTest();
-
+        
         System.assertEquals(orderMapOld.size(), orderList.size(), 'OrderTriggerHelper.getOrderListToUpdate should return a List.');
     }
+
 }
