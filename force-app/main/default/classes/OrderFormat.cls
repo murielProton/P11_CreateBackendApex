@@ -25,4 +25,12 @@ public with sharing class OrderFormat {
         return orderSetToReturn;
     }
 
+    public static List<Order> transformSetToList(Set<Order> orderSet) {
+        List<Order> orderListToReturn = new List<Order>();
+        for(Order orderCurent : orderSet){
+            orderListToReturn.add(orderCurent);
+        }
+        return orderListToReturn;
+    }
+
 }

@@ -62,4 +62,16 @@ public with sharing class OrderFormat_Test {
 
         System.assertEquals(orderListForThisTest.size(), orderSetToTest.size(), 'OrderFilter.transformListToSet should return a Set of the same size as the List it received as parameter.');
     }
+    @isTest
+    public static void testTransformSetToList() {
+        
+        List<Order> orderListForThisTest = OrderGet.getOrdersAll();
+        Set<Order> orderSetForTest = OrderFormat.transformListToSet(orderListForThisTest);
+
+        Test.startTest();
+        List<Order> orderlistToTest = OrderFormat.transformSetToList(orderSetForTest);
+        Test.stopTest();
+
+        System.assertEquals(orderSetForTest.size(), orderlistToTest.size(), 'OrderFilter.transformSetToList should return a List of the same size as the Set it received as parameter.');
+    }
 }
