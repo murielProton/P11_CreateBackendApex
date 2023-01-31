@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-30-2023
+ * @last modified on  : 01-31-2023
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 @isTest
@@ -11,8 +11,8 @@ public with sharing class OrderFormat_Test {
     private static String pricebook2Name = 'France Price Book';
     private static String orderName = 'Telepathy-';
 
-    @isTest
-    public static void testTransformListToMap() {
+    @TestSetup
+    public static void setupOrderFromat(){
         //Create a List of Accounts
         AccountDataFactory.createAccountsList(3);
         List<Account> accountListForTest = AccountGet.getAccountsAll();
@@ -37,6 +37,11 @@ public with sharing class OrderFormat_Test {
         List<Contract> contractListToCreateOrders = ContractGet.getContractsAll();
         // create an orderList ID are needed to populate the map
         OrderDataFactory.createOrdersListForEachContract(contractListToCreateOrders, pricebookForThisTest);
+    }
+    
+    @isTest
+    public static void testTransformListToMap() {
+        
         List<Order> orderListForThisTest = OrderGet.getOrdersAll();
         
         Test.startTest();
@@ -44,5 +49,17 @@ public with sharing class OrderFormat_Test {
         Test.stopTest();
 
         System.assertEquals(orderListForThisTest.size(), orderMapToTest.size(), 'OrderFilter.transformListToMap should return a map of the same size as the List it received as parameter.');
+    }
+
+    @isTest
+    public static void testTransformListToSet() {
+        
+        List<Order> orderListForThisTest = OrderGet.getOrdersAll();
+        
+        Test.startTest();
+        Set<Order> orderSetToTest = OrderFormat.transformListToSet(orderListForThisTest);
+        Test.stopTest();
+
+        System.assertEquals(orderListForThisTest.size(), orderSetToTest.size(), 'OrderFilter.transformListToSet should return a Set of the same size as the List it received as parameter.');
     }
 }

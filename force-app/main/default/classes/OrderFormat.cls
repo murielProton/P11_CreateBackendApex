@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-30-2023
+ * @last modified on  : 01-31-2023
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 public with sharing class OrderFormat {
@@ -15,6 +15,14 @@ public with sharing class OrderFormat {
             }
         }
         return orderMapToReturn;
+    }
+
+    public static Set<Order> transformListToSet(List<Order> orderList) {
+        Set<Order> orderSetToReturn = new Set<Order>();
+        for(Order orderCurent : orderList){
+            orderSetToReturn.add(orderCurent);
+        }
+        return orderSetToReturn;
     }
 
 }
