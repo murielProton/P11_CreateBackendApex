@@ -82,4 +82,22 @@ public with sharing class OrderGet {
         return orderList;
         
     }
+    public static List<Order> getOrderWherePricebook2Exist(){
+        List<Order> orderList = new List<Order>();
+
+        if(Order.SObjectType.getDescribe().isAccessible() &&
+        Schema.SObjectType.Order.fields.Name.isAccessible() &&
+        Schema.SObjectType.Order.fields.Status.isAccessible()){
+            orderList = [SELECT Id, 
+                                AccountId,
+                                Status,
+                                ContractId
+                        FROM Order
+                        WHERE Pricebook2Id != Null];
+        } else {
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an Order reccord.');
+        }
+        return orderList;
+        
+    }
 }

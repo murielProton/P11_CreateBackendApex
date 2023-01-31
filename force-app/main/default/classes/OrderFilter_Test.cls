@@ -75,10 +75,10 @@ public with sharing class OrderFilter_Test {
         }
 
         Test.startTest();
-        Set<Order> orderSet = OrderFilter.orderListFilterStatusDraftToActivated(orderMapOld, orderListNew);
+        List<Order> orderList = OrderFilter.orderListFilterStatusDraftToActivated(orderMapOld, orderListNew);
         Test.stopTest();
 
-        System.assertEquals(orderMapOld.size(), orderSet.size(), 'OrderFilter.orderListFilterStatusDraftToActivated should return a Set.');
+        System.assertEquals(orderMapOld.size(), orderList.size(), 'OrderFilter.orderListFilterStatusDraftToActivated should return a Set.');
     }
     @isTest
     static void testOrderListFilterLinkedToProduct2(){
@@ -112,12 +112,10 @@ public with sharing class OrderFilter_Test {
             orderCurrent.Status = 'Activated';
         }
 
-        Set<Order> orderSetForTest = OrderFormat.transformListToSet(orderListNew);
-
         Test.startTest();
-        Set<Order> orderSet = OrderFilter.orderListFilterLinkedToProduct2(orderSetForTest);
+        List<Order> orderList = OrderFilter.orderListFilterLinkedToProduct2(orderListNew);
         Test.stopTest();
 
-        System.assertEquals(orderSetForTest.size(), orderSet.size(), 'OrderFilter.orderListFilterLinkedToProduct2 should return a Set.');
+        System.assertEquals(orderListNew.size(), orderList.size(), 'OrderFilter.orderListFilterLinkedToProduct2 should return a Set.');
     }
 }

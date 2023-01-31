@@ -46,7 +46,7 @@ public with sharing class OrderTriggerHelper_Test {
     }
 
     @isTest
-    public static void testGetOrderListToUpdate(){
+    public static void testUpdateOrSendErrorOnOrder(){
         // get a list of Orders records
         List<Order> orderListOld = OrderGet.getOrdersAll();
         //Convert orderListOld into a map
@@ -74,9 +74,9 @@ public with sharing class OrderTriggerHelper_Test {
         }
 
         Test.startTest();
-        List<Order> orderList = OrderTriggerHelper.getOrderListToUpdate(orderMapOld, orderListNew);
+        OrderTriggerHelper.updateOrSendErrorOnOrder(orderMapOld, orderListNew);
         Test.stopTest();
-        
+        List<Order> orderList = OrderGet.getOrderWherePricebook2Exist();
         System.assertEquals(orderMapOld.size(), orderList.size(), 'OrderTriggerHelper.getOrderListToUpdate should return a List.');
     }
 
