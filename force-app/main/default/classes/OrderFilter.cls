@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-30-2023
+ * @last modified on  : 01-31-2023
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 public with sharing class OrderFilter {
@@ -22,26 +22,26 @@ public with sharing class OrderFilter {
         return orderSetToReturn;
     }
 
-    public static Map<Id, Order> orderListFilterOrdersLinkedToProduct2(Set<Order> orderSet) {
-        // TODO returns a Map of OrderItem ID and Order
-        Map<Id, Order> orderItemIdOrderMap = new Map<Id, Order>();
-        // Get OrderItem WHERE Order ID
+    public static Set<Order> orderListFilterLinkedToProduct2(Set<Order> orderSet) {
+        //Declare the Set to return
+        Set<Order> orderSetToReturn = new Set<Order>();
+
+        // return a List of OrderItems when the OrderItem is linked to a Product2 and an Order
         List<OrderItem> orderItemList = OrderItemGet.getOrderItemWhereProduct2AndOrderExist();
-        //TODO transforme it into a Map
+        // convert the list to a Map<OrderItem.OrderId, OrderItem>
+        Map<Id, OrderItem> orderItemMap = OrderItemFormat.transformListToMapOrderIdOrderItem(orderItemList);
+
+        // transforme it into a Map Product2.Id Order
             for(Order orderCurent : orderSet){
                 OrderItem orderCurentOld = orderItemMap.get(orderCurent.Id);
-                if( orderCurentOld.Status == OrderId
-                    && orderCurentNew.Status == 'Activated'){
-                        orderSetToReturn.add(orderCurentNew);
-                    }
+                orderSetToReturn.add(orderCurent);
             }
-
-        return orderMapToReturn;
+        return orderSetToReturn;
     }
 
-    public static Map<Id, Order> orderListFilterOrdersLinkedToProduct2(Set<Order> orderSet) {
+    /*public static Map<Id, Order> orderListFilterOrdersLinkedToProduct2(Set<Order> orderSet) {
         // TODO returns a Map of ProductId and Order
-        /*Map<Id, Order> orderMapToReturn = new Map<Id, Order>();
+        Map<Id, Order> orderMapToReturn = new Map<Id, Order>();
 
             for(Order orderCurentNew : orderListNew){
                 Order orderCurentOld = orderMapOld.get(orderCurentNew.Id);
@@ -49,8 +49,8 @@ public with sharing class OrderFilter {
                     && orderCurentNew.Status == 'Activated'){
                         orderSetToReturn.add(orderCurentNew);
                     }
-            }*/
+            }
 
         return orderMapToReturn;
-    }
+    }*/
 }
