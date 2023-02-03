@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-31-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 01-02-2023
+ * @last modified by  : Muriel Proton
 **/
 public with sharing class OrderFilter {
 
@@ -20,19 +20,19 @@ public with sharing class OrderFilter {
     }
 
     public static List<Order> orderListFilterLinkedToProduct2(List<Order> orderList) {
-        //Declare the Set to return
+        //Declare the List to return
         List<Order> orderListToReturn = new List<Order>();
-
+        // transform a list of orders into a list of orders id
+        List<Id> orderIdList = new List<Id>(new Map<Id, SObject> (orderList).keySet());
         // return a List of OrderItems when the OrderItem is linked to a Product2 and an Order
-        List<OrderItem> orderItemList = OrderItemGet.getOrderItemWhereProduct2AndOrderExist();
-        // convert the list to a Map<OrderItem.OrderId, OrderItem>
-        Map<Id, OrderItem> orderItemMap = OrderItemFormat.transformListToMapOrderIdOrderItem(orderItemList);
+        List<Order> orderWithOrderItem = OrderGet.getOrderWithOrderItem(orderIdList);
 
         // transforme it into a Set of Order
-            for(Order orderCurent : orderList){
-                OrderItem orderCurentOld = orderItemMap.get(orderCurent.Id);
+        for(Order orderCurent : orderWithOrderItem){
+            if(orderCurent.orderItems.size() > 0){
                 orderListToReturn.add(orderCurent);
             }
+        }
         return orderListToReturn;
     }
 

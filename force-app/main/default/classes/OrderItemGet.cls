@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-31-2023
+ * @last modified on  : 02-01-2023
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
  * OrderItem are linked to a Product2 by default. It is impossible to creat a record on OrderItem without a Product2 and a PricebookEntry.
 **/
@@ -48,7 +48,7 @@ public with sharing class OrderItemGet {
         return orderItemList;
         
     }
-    public static List<OrderItem> getOrderItemWhereProduct2AndOrderExist(){
+    public static List<OrderItem> getOrderItemWhereProduct2AndOrderExist(List<Id> orderIdList){
 
         List<OrderItem> orderItemList = new List<OrderItem>();
 
@@ -60,7 +60,7 @@ public with sharing class OrderItemGet {
                                 Product2Id,
                                 PricebookEntryId
                         FROM OrderItem
-                        WHERE OrderId != null
+                        WHERE OrderId IN: orderIdList
                         AND Product2Id != null];
         } else {
             throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an OrderItem reccord.');

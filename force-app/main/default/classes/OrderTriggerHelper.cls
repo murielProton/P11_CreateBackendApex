@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-31-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 01-02-2023
+ * @last modified by  : Muriel Proton
 **/
 public with sharing class OrderTriggerHelper {
 
@@ -13,12 +13,7 @@ public with sharing class OrderTriggerHelper {
 
         // get the list of orders you need to update
         List<Order> orderListUpdatable = OrderFilter.orderListFilterLinkedToProduct2(orderListStatusChanged);
-        // Update the list
-        if (Schema.sObjectType.Order.fields.Status.isUpdateable() == false) {
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to update this list of records on Order.');
-         }else{
-            update orderListUpdatable;
-        }
+        // No need to update because we are used in a before update !!
         
         // get the list for the error messages
         Set<Order> oderSetUnupdatable = new Set<Order>(orderListStatusChanged);

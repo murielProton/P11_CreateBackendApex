@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-31-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 01-02-2023
+ * @last modified by  : Muriel Proton
 **/
 @isTest
 public with sharing class OrderItemGet_Test {
@@ -76,7 +76,9 @@ public with sharing class OrderItemGet_Test {
         PricebookEntry pricebookEntryForThisTest = PricebookEntryGet.getPricebookEntryByPricebook2AndProduct2(pricebookForThisTest.Id, product2ForThisTest.Id)[0];
 
         Test.startTest();
-        List<OrderItem> orderItemsListToTest = OrderItemGet.getOrderItemWhereProduct2AndOrderExist();
+        // Transform a list of order to list of order ID
+        List<Id> orderIdList = new List<ID>(new Map<Id, Order>(ordersListForThisTest).keySet());
+        List<OrderItem> orderItemsListToTest = OrderItemGet.getOrderItemWhereProduct2AndOrderExist(orderIdList);
         Test.stopTest();
 
         System.assertEquals(1, orderItemsListToTest.size(), 'OrderItemGet.getOrderItemWhereProduct2AndOrderExist should return at least one reccord.');

@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-31-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 01-02-2023
+ * @last modified by  : Muriel Proton
 **/
 public with sharing class OrderGet {
 
@@ -35,11 +35,21 @@ public with sharing class OrderGet {
                                 AccountId,
                                 Status
                         FROM Order
-                        WHERE Status = :'Activated'];
+                        WHERE Status = 'Activated'];
         } else {
             throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an Order reccord.');
         }
         return orderList;
+    }
+
+    public static List<Order> getOrderWithOrderItem(List<id> orderIdList){
+        List<Order> orderListToReturn = [SELECT Id,
+                                        (SELECT Id, Product2Id, OrderId
+                                        FROM OrderItems
+                                        WHERE Product2Id != null)
+                                FROM Order
+                                WHERE Id IN: orderIdList];
+        return orderListToReturn;
     }
 
     public static List<Order> getOrderByAccountAndContract(Id accountId, Id contractId){
