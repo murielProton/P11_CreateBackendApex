@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-02-2023
+ * @last modified on  : 03-02-2023
  * @last modified by  : Muriel Proton
 **/
 public with sharing class OrderGet {
@@ -16,6 +16,8 @@ public with sharing class OrderGet {
         Schema.SObjectType.Order.fields.Status.isAccessible()){
             orderList = [SELECT Id, 
                                 AccountId,
+                                ContractId,
+                                Pricebook2Id,
                                 Status
                         FROM Order];
         } else {
@@ -31,7 +33,8 @@ public with sharing class OrderGet {
         if(Order.SObjectType.getDescribe().isAccessible() &&
         Schema.SObjectType.Order.fields.Name.isAccessible() &&
         Schema.SObjectType.Order.fields.Status.isAccessible()){
-            orderList = [SELECT Id, 
+            orderList = [SELECT Id,
+                                Name,
                                 AccountId,
                                 Status
                         FROM Order
@@ -44,6 +47,7 @@ public with sharing class OrderGet {
 
     public static List<Order> getOrderWithOrderItem(List<id> orderIdList){
         List<Order> orderListToReturn = [SELECT Id,
+                                                Name,
                                         (SELECT Id, Product2Id, OrderId
                                         FROM OrderItems
                                         WHERE Product2Id != null)
@@ -58,7 +62,8 @@ public with sharing class OrderGet {
         if(Order.SObjectType.getDescribe().isAccessible() &&
         Schema.SObjectType.Order.fields.Name.isAccessible() &&
         Schema.SObjectType.Order.fields.Status.isAccessible()){
-            orderList = [SELECT Id, 
+            orderList = [SELECT Id,
+                                Name,
                                 AccountId,
                                 Status,
                                 ContractId
@@ -81,6 +86,7 @@ public with sharing class OrderGet {
         Schema.SObjectType.Order.fields.Name.isAccessible() &&
         Schema.SObjectType.Order.fields.Status.isAccessible()){
             orderList = [SELECT Id, 
+                                Name,
                                 AccountId,
                                 Status,
                                 ContractId
@@ -98,7 +104,8 @@ public with sharing class OrderGet {
         if(Order.SObjectType.getDescribe().isAccessible() &&
         Schema.SObjectType.Order.fields.Name.isAccessible() &&
         Schema.SObjectType.Order.fields.Status.isAccessible()){
-            orderList = [SELECT Id, 
+            orderList = [SELECT Id,
+                                Name,
                                 AccountId,
                                 Status,
                                 ContractId

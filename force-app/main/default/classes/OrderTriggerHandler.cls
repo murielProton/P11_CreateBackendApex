@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 02-01-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 06-02-2023
+ * @last modified by  : Muriel Proton
 **/
 public with sharing class OrderTriggerHandler extends TriggerHandler {
     List<Order> orderListOld =(List<Order>)Trigger.old;
@@ -19,7 +19,7 @@ public with sharing class OrderTriggerHandler extends TriggerHandler {
         display a message for the user
         message value : "'vous devez saisir un Product2 sur l'enregistrement Order '+orderName"
         OrderTriggerHelper.methodName(orderListNew, orderListOld);*/
-        OrderTriggerHelper.updateOrSendErrorOnOrder(orderMapOld, orderListNew);
+        OrderTriggerHelper.sendErrorOnOrder(orderMapOld, orderMapNew);
     }
     
 }

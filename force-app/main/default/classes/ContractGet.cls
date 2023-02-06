@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-23-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 06-02-2023
+ * @last modified by  : Muriel Proton
 **/
 public with sharing class ContractGet {
 
@@ -13,7 +13,8 @@ public with sharing class ContractGet {
         if(Contract.SObjectType.getDescribe().isAccessible()){
             contractsListToReturn = [SELECT Id,
                                             Name,
-                                            AccountId
+                                            AccountId,
+                                            Status
                                      FROM Contract
                                     ];
         } else {
@@ -28,7 +29,8 @@ public with sharing class ContractGet {
         if(Contract.SObjectType.getDescribe().isAccessible()){
             contractsListToReturn = [SELECT Id,
                                             Name,
-                                            AccountId
+                                            AccountId,
+                                            Status
                                      FROM Contract
                                      WHERE AccountId = :AccountId
                                     ];

@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-02-2023
+ * @last modified on  : 03-02-2023
  * @last modified by  : Muriel Proton
 **/
 @isTest
@@ -68,7 +68,7 @@ public with sharing class OrderUpdate_Test {
             OrderUpdate.updateOrdersStatusToActivated(orderListForTest);
             System.assert(false, 'An exception message should have been triggered.');
         }catch(DMLException e){
-            System.assert(e != null && e.getMessage().contains('il doit être associé à un produit'), 'An exception message should have been triggered.');
+            System.assert(e != null && e.getMessage().contains(', il doit être associé à un produit (Product2).'), 'An exception message should have been triggered.');
         }
         Test.stopTest();
     }

@@ -2,33 +2,33 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-02-2023
+ * @last modified on  : 06-02-2023
  * @last modified by  : Muriel Proton
 **/
 public with sharing class OrderTriggerHelper {
 
-    public static void updateOrSendErrorOnOrder(Map<Id, Order> orderMapOld, List<Order> orderListNew){
+    public static void sendErrorOnOrder(Map<Id, Order> orderMapOld, Map<Id, Order> orderMapNew){
         // If the field Status value changes from Draft to Activated
-        List<Order> orderListStatusChanged = OrderFilter.orderListFilterStatusDraftToActivated(orderMapOld, orderListNew);
-
-        // get the list of orders you need to update
-        List<Order> orderListUpdatable = OrderFilter.orderListFilterLinkedToProduct2(orderListStatusChanged);
+        List<Order> orderListStatusChanged = OrderFilter.orderListFilterStatusDraftToActivated(orderMapOld, orderMapNew);
+        // the update part is done without intervention
         // No need to update because we are used in a before update !!
-        
+
         // get the list for the error messages
-        Set<Order> oderSetUnupdatable = new Set<Order>(orderListStatusChanged);
-        oderSetUnupdatable.removeAll(orderListUpdatable);
-        List<Order> oderListUnupdatable = new List<Order>(oderSetUnupdatable);
-        // send error messages
-        displayMessageForEachOrderNotValid(oderListUnupdatable);
+        List<Order> oderListUnupdatable = OrderFilter.orderListFilterNOTLinkedToProduct2(orderListStatusChanged);
+        System.debug('orderListStatusChanged' +orderListStatusChanged);
+        System.debug('oderListUnupdatable' +oderListUnupdatable);
+        // send error messages TOOD SORT PROBLEM HERE !
+        displayMessageForEachOrderNotValid(oderListUnupdatable, orderMapNew);
+
     }
 
-    /*methode connot be tested without a mock
-    methode to get the list of Order records to display error message*/
-    public static void displayMessageForEachOrderNotValid(List<Order> orderList){
+    /* Methode has to be used within a condition or with a specified list */
+    public static void displayMessageForEachOrderNotValid(List<Order> orderList, Map<Id, Order> orderMapNew){
         for(Order orderCurent : orderList){
+            //We need a map here cause we are using this in trigger !!
             //sObject.addError('bad');
-            orderCurent.addError('Avant de pouvoir passer le statut de '+orderCurent.Name+', il doit être associé à un produit (Product2).');
+            Order orderToAddErrorTo = orderMapNew.get(orderCurent.Id);
+            orderToAddErrorTo.addError('Avant de pouvoir passer le statut à /"Activated/" de '+orderCurent.Name+', il doit être associé à un produit (Product2).');
         }
     }
 
