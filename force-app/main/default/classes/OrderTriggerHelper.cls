@@ -15,9 +15,7 @@ public with sharing class OrderTriggerHelper {
 
         // get the list for the error messages
         List<Order> oderListUnupdatable = OrderFilter.orderListFilterNOTLinkedToProduct2(orderListStatusChanged);
-        System.debug('orderListStatusChanged' +orderListStatusChanged);
-        System.debug('oderListUnupdatable' +oderListUnupdatable);
-        // send error messages TOOD SORT PROBLEM HERE !
+        // send error messages 
         displayMessageForEachOrderNotValid(oderListUnupdatable, orderMapNew);
 
     }

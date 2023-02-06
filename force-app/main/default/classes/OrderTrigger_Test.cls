@@ -75,10 +75,7 @@ public with sharing class OrderTrigger_Test {
             orderItemsList.add(OrderItemDataFactory.constructOneOrderItem(orderCurent.Id, product2ForThisTest.Id, pricebookEntryForThisTest.Id));
         }
         insert orderItemsList;
-        List<Order> orderListForTest = OrderGet.getOrdersAll();
 
-        // Change the Orders -> Order.Status to Activated
-        OrderUpdate.updateOrdersStatusToActivated(orderListForTest);
     }
 
     @isTest
@@ -102,6 +99,25 @@ public with sharing class OrderTrigger_Test {
         }
         Test.stopTest();
         System.assertEquals(true, exectionOK, 'An execptions should have been thorwn.');
+    }
+
+    @isTest
+    public static void testOrderTriggerUpdateValid(){
+        List<Order> orderListToUpdate = OrderGet.getOrdersAll();
+        Boolean exectionOK = true;
+        // Change the Orders -> Order.Status to Activated
+
+        Test.startTest();
+        try{
+            OrderUpdate.updateOrdersStatusToActivated(orderListToUpdate);
+        }catch(DMLException e){
+            exectionOK = false;
+            System.assert(e != null && e.getMessage().contains(', il doit être associé à un produit (Product2).'), 'An exception message should have been triggered.'+e.getMessage());
+        }
+        Test.stopTest();
+        List<Order> orderListForTest = OrderGet.getOrdersAll();
+        System.assertEquals(true, exectionOK, 'NO execptions should have been thorwn.');
+        System.assertEquals('Activated', orderListForTest[0].Status, 'The Status of the Order record should be Activated.');
     }
     
 }

@@ -25,7 +25,6 @@ public with sharing class OrderTriggerHelper_Test {
         // for the test to succeed the Contract Status should be Activated, but it can't be inserted as such, so we need to update it
         List<Contract> contractsListToUpdate = ContractGet.getContractsAll();
         ContractUpdate.updateContractsStatusToActivated(contractsListToUpdate);
-        System.debug('contract list '+contractsListToUpdate);
         //1 to create a Pricebook2 field Standard = true the price book needs to be linked to a Product2
         // Create Product2
         Product2DataFactory.createProduct2();
@@ -37,29 +36,23 @@ public with sharing class OrderTriggerHelper_Test {
         //Execute an update DML on the Pricebook2 record, to make IsStandard to true
         update pricebookStandardToUpdate; 
         List<PriceBook2> pricebook2ListALL = Pricebook2Get.getPriceBook2All();  
-        System.debug('pricebook2ListALL '+pricebook2ListALL);
 
         PriceBook2 pricebook2Standard = Pricebook2Get.getPriceBook2Standard();
         System.assertEquals(true, pricebook2Standard.IsStandard, 'price book 2 not standard');
         //1 END
 
-        System.debug('pricebook2Standard '+pricebook2Standard);
         List<Product2> product2ListForThisTest = Product2Get.getProduct2ListByName(productName);
         Product2 product2ForThisTest = product2ListForThisTest[0];
-        System.debug('product2ForThisTest '+product2ForThisTest);
         
         // then PricebookEntry for normal Pricebook2 can be inserted.
         PricebookEntryDataFactory.createPriceBookEntry(pricebook2Standard, product2ForThisTest);
         // WHY NO STANDARD PRICEBOOK ARE CREATED ???
         
         List<Pricebook2> listforTestPB2 = [SELECT Id, IsStandard FROM PriceBook2];
-        System.debug('list des pricebook 2 '+listforTestPB2) ;
         
         // get records to construct an Order
         Account accountForTest = AccountGet.getAccount('accountName-0');
-        System.debug('accountForTest '+accountForTest);
         List<Contract> contractsListForTest = ContractGet.getContractsOfAccount(accountForTest.Id);
-        System.debug('contractsListForTest '+contractsListForTest);
         Contract contractForTest = contractsListForTest[0];
         //Create Orders
         List<Order> listOfOrdersToInsert = new List<Order>();
@@ -71,13 +64,11 @@ public with sharing class OrderTriggerHelper_Test {
         insert listOfOrdersToInsert;
         // they need to have their Status set to Ordered
         List<Order> orderList = OrderGet.getOrdersAll();
-        System.debug('orderList.size' + orderList.size() );
 
         //OrderItem links product to Order 
         // for each Orders create an OrderItem
         List<OrderItem> orderItemsList = new List<OrderItem>();
         PricebookEntry pricebookEntryForThisTest = PricebookEntryGet.getPricebookEntryByPricebook2AndProduct2(pricebook2Standard.Id, product2ForThisTest.Id)[0];
-        System.debug('pricebookEntryForThisTest '+pricebookEntryForThisTest);
 
         for(Order orderCurent : orderList){
             //(Order orderForThisTest, Product2 product2ForThisTest, PricebookEntry pricebookEntryForThisTest)
@@ -85,43 +76,14 @@ public with sharing class OrderTriggerHelper_Test {
         }
         insert orderItemsList;
         List<Order> orderListForTest = OrderGet.getOrdersAll();
-        System.debug('orderItem ListForTest '+OrderItemGet.getOrderItemListAll());
 
-        System.debug('orderListForTest '+orderListForTest);
-        // Change the Orders -> Order.Status to Activated
-        OrderUpdate.updateOrdersStatusToActivated(orderListForTest);
     }
 
     @isTest
-    public static void testUpdateOrSendErrorOnOrder(){
-        List<Order> orderList = OrderGet.getOrdersAll();
-        System.debug('orderList.size' + orderList.size() );
-        Boolean exectionOK = false;
-        Account accountForTest = AccountGet.getAccountsAll()[0];
-        Contract contractForTest = ContractGet.getContractsAll()[0]; 
-        Pricebook2 pricebookEntryForThisTest = Pricebook2Get.getPriceBook2Standard();
-        // get a list of Orders records
-        Order orderToAdd = OrderDataFactory.constructOneOrder('Discord', accountForTest.Id, contractForTest.Id , pricebookEntryForThisTest.Id);
-        insert orderToAdd;
-
-        orderToAdd.Status = 'Activated';
-        Test.startTest();
-        try{
-            update orderToAdd;
-            // OrderTriggerHelper.updateOrSendErrorOnOrder(orderMapOld, orderListNew);
-            // System.assert(false, 'An exception message should have been triggered.');
-        }catch(DMLException e){
-            exectionOK = true;
-            System.assert(e != null && e.getMessage().contains(', il doit être associé à un produit (Product2).'), 'An exception message should have been triggered.'+e.getMessage());
-        }
-        Test.stopTest();
-        System.assertEquals(true, exectionOK, 'An execptions should have been thorwn.');
-
-        //List<Order> orderList = OrderGet.getOrderWherePricebook2Exist();
-        //System.debug('orderMapOld.size() '+orderMapOld.size());
-        //System.debug('orderList.size() '+orderList.size());
-
-        //System.assertEquals(orderMapOld.size(), orderList.size(), 'OrderTriggerHelper.getOrderListToUpdate should return a List.');
+    public static void testSendErrorOnOrder(){
+        // Not testable because the one record has 1 Id for two different maps
+        // And one record cannot have 2 different values, at the same time, 'Activated' and 'Draft'.
+        // must be tested with trigger
     }
 
 }
