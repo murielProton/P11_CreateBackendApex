@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 06-02-2023
+ * @last modified on  : 07-02-2023
  * @last modified by  : Muriel Proton
 **/
 @isTest
@@ -50,12 +50,24 @@ public with sharing class AccountGet_Test {
         OrderDataFactory.createOrdersListForEachContract(contractListToCreateOrders, pricebook2Standard);
         List<Order> orderList = OrderGet.getOrdersAll();
 
-        System.debug('list size Contract '+contractListToCreateOrders.size());
-        System.debug('list size Order '+orderList.size());
         Test.startTest();
         Set<Account> accountsListToTest = AccountGet.getAccontsLinkedToOrders(orderList);
         Test.stopTest();
 
         System.assertEquals( 5, accountsListToTest.size(),'AccountGet.getAccontsLinkedToOrders() should return a list of five records.');
+    }
+    @isTest
+    public static void testGetAccountsById(){
+        Set<Id> accountIDSet = new Set<Id>();
+        List<Account> accountList = AccountGet.getAccountsAll();
+        for(Account accountCurent : accountList){
+            accountIDSet.add(accountCurent.Id);
+        }
+        
+        Test.startTest();
+        Set<Account> accountsListToTest = AccountGet.getAccontsByIds(accountIDSet);
+        Test.stopTest();
+
+        System.assertEquals( accountList.size(), accountsListToTest.size(),'AccountGet.getAccontsByIds(accountIDSet) should return a list of five records.');
     }
 }

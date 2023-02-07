@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 06-02-2023
+ * @last modified on  : 07-02-2023
  * @last modified by  : Muriel Proton
 **/
 public with sharing class AccountGet {
@@ -23,7 +23,8 @@ public with sharing class AccountGet {
         List<Account> accountsList = new List<Account>();
         checkPermissionAccount();
         accountsList = [SELECT Id,
-                                Name
+                               Name,
+                               Active__c
                         FROM Account
                         ];
         return accountsList;
@@ -39,14 +40,14 @@ public with sharing class AccountGet {
         return getAccontsByIds(accountIDList);
     }
 
-    public static Set<Account> getAccontsByIds(Set<Id> accountIDList){
+    public static Set<Account> getAccontsByIds(Set<Id> accountIDSet){
         List<Account> accoutListToReturn = new List<Account>();
         checkPermissionAccount();
         accoutListToReturn = [SELECT Id,
                                     Name,
                                     Active__c
                                 FROM Account
-                                WHERE Id IN :accountIDList];
+                                WHERE Id IN :accountIDSet];
         Set<Account> accoutSetToReturn  = new Set<Account>(accoutListToReturn);
         return accoutSetToReturn;
     }
