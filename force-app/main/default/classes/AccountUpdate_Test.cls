@@ -14,15 +14,28 @@ public with sharing class AccountUpdate_Test {
     }
 
     @isTest
-    public static void testUpdateAccountFieldActive(){
+    public static void testUpdateAccountFieldActiveToTrue(){
         List<Account> accountListToUpdate = AccountGet.getAccountsAll();
 
         Test.startTest();
-        AccountUpdate.updateAccountFieldActive(accountListToUpdate);
+        AccountUpdate.updateAccountFieldActiveToTrue(accountListToUpdate);
         Test.stopTest();
 
         List<Account> accountListToTest = AccountGet.getAccountsAll();
 
-        System.assertEquals(true, accountListToTest[0].Active__c,'updateAccountFieldActive(List<Account> accountList) Should update field Active__c to true on all accounts.');
+        System.assertEquals(true, accountListToTest[0].Active__c,'updateAccountFieldActiveToTrue(List<Account> accountList) Should update field Active__c to true on all accounts.');
+    }
+    @isTest
+    public static void testUpdateAccountFieldActiveToFalse(){
+        List<Account> accountListToUpdate = AccountGet.getAccountsAll();
+        AccountUpdate.updateAccountFieldActiveToTrue(accountListToUpdate);
+
+        Test.startTest();
+        AccountUpdate.updateAccountFieldActiveToFalse(accountListToUpdate);
+        Test.stopTest();
+
+        List<Account> accountListToTest = AccountGet.getAccountsAll();
+
+        System.assertEquals(false, accountListToTest[0].Active__c,'updateAccountFieldActiveToFalse(List<Account> accountList) Should update field Active__c to false on all accounts.');
     }
 }

@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-30-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 07-02-2023
+ * @last modified by  : Muriel Proton
 **/
 @isTest
 public with sharing class OrderItemDataFactory_Test {
@@ -43,7 +43,7 @@ public with sharing class OrderItemDataFactory_Test {
     @isTest
     static void testConstructOneOrderItem(){
         // get sObjects to run the test
-        Id accountId = AccountGet.getAccount(accountName).Id;
+        Id accountId = AccountGet.getAccountByName(accountName).Id;
         Id contractId = ContractGet.getContractsOfAccount(accountId)[0].Id;
         Id orderId = OrderGet.getOrderByAccountAndContract(accountId, contractId)[0].Id;
         
@@ -61,7 +61,7 @@ public with sharing class OrderItemDataFactory_Test {
     @isTest
     static void testCreateOrderItemsList(){
         // get sObjects to run the test
-        Id accountId = AccountGet.getAccount(accountName).Id;
+        Id accountId = AccountGet.getAccountByName(accountName).Id;
         Id contractId = ContractGet.getContractsOfAccount(accountId)[0].Id;
         List<Order> orderListForTest = OrderGet.getOrderByAccountAndContract(accountId, contractId);
         

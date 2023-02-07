@@ -51,7 +51,7 @@ public with sharing class OrderTriggerHelper_Test {
         List<Pricebook2> listforTestPB2 = [SELECT Id, IsStandard FROM PriceBook2];
         
         // get records to construct an Order
-        Account accountForTest = AccountGet.getAccount('accountName-0');
+        Account accountForTest = AccountGet.getAccountByName('accountName-0');
         List<Contract> contractsListForTest = ContractGet.getContractsOfAccount(accountForTest.Id);
         Contract contractForTest = contractsListForTest[0];
         //Create Orders
@@ -96,5 +96,27 @@ public with sharing class OrderTriggerHelper_Test {
         List<Account> accountListToTest = AccountGet.getAccountActiveTrue();
         
         System.assertEquals(1, accountListToTest.size(), 'AccountUpdate.updateAccountActiveIfLinkedToOrder(List<Order>) should update Accounts fields Active__c.');
+    }
+    @isTest
+    public static void testUpdateAccountActiveIfOrderDelete(){
+        List<Order> orderListForTest = OrderGet.getOrdersAll();
+        Set<Id> orderIDSetAll = new Set<Id>();
+        for (Order orderCurent : orderListForTest){
+            orderIDSetAll.add(orderCurent.Id);
+        }
+        insert new Account(Name = 'AccountName-6');
+        List<Account> accountsList = AccountGet.getAccountsAll();
+        Set<Id> accountIDSetOfAllDeletedOrders = new Set<Id>();
+        for(Account accountCurent : accountsList){
+            accountIDSetOfAllDeletedOrders.add(accountCurent.Id);
+        }
+
+        Test.startTest();
+        OrderTriggerHelper.updateAccountActiveIfOrderDelete(orderListForTest);
+        Test.stopTest();
+
+        List<Account> accountListToTest = AccountGet.getAccountActiveFalse();
+        
+        System.assertEquals(1, accountListToTest.size(), 'AccountUpdate.updateAccountActiveIfOrderDelete(List<Order>) should update Accounts fields Active__c To FALSE.');
     }
 }

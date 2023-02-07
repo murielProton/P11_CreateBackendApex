@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-23-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 07-02-2023
+ * @last modified by  : Muriel Proton
 **/
 @isTest
 public with sharing class ContractDataFactory_Test {
@@ -19,7 +19,7 @@ public with sharing class ContractDataFactory_Test {
 
     @isTest
     static void testConstructContract(){
-        Account accountForTest = AccountGet.getAccount(accountName);
+        Account accountForTest = AccountGet.getAccountByName(accountName);
         Test.startTest();
         Contract contractToTest = ContractDataFactory.constructContract(accountForTest.Id);
         Test.stopTest();

@@ -51,7 +51,7 @@ public with sharing class OrderTrigger_Test {
         List<Pricebook2> listforTestPB2 = [SELECT Id, IsStandard FROM PriceBook2];
 
         // get records to construct an Order
-        Account accountForTest = AccountGet.getAccount('accountName-0');
+        Account accountForTest = AccountGet.getAccountByName('accountName-0');
         List<Contract> contractsListForTest = ContractGet.getContractsOfAccount(accountForTest.Id);
         Contract contractForTest = contractsListForTest[0];
         //Create Orders
@@ -154,5 +154,72 @@ public with sharing class OrderTrigger_Test {
         List<Account> accountList = AccountGet.getAccountActiveTrue();
 
         System.assertEquals(1, accountList.size(), 'After inserting records on Order, Account field Active__c should be updated.');
+    }
+    @isTest
+    public static void testOrderTriggerHandlerAfterDelete(){
+        List<Contract> contractListToCreateOrders = ContractGet.getContractsAll();
+
+        PriceBook2 pricebook = Pricebook2Get.getPriceBook2Standard();
+        List<Order> orderbeforeInsert = OrderGet.getOrdersAll();
+        System.debug('orderbeforeInsert list '+orderbeforeInsert.size());
+        insert new Account(Name = 'AccountName-6');
+        Account account6 = AccountGet.getAccountByName('AccountName-6');
+        Id accountIdForDeletion = account6.Id;
+        //insert contract for doomed Account
+        Contract contract = new Contract(
+            AccountId = accountIdForDeletion,
+            //can't create a contract with the Status set to Activated
+            Status = 'Draft',
+            StartDate = Date.today(),
+            ContractTerm = 6
+        );
+        insert contract;
+        Contract contractDoomed = [SELECT Id
+                                    FROM Contract
+                                    WHERE AccountId = :accountIdForDeletion
+                                    LIMIT 1];
+        List<Order> orderList = new List<Order>();
+        Order orderConstructed1 = new Order(
+            Name = orderName+'1',
+            AccountId = contractListToCreateOrders[0].AccountId, //Required
+            ContractId = contractListToCreateOrders[0].Id,
+            Status = 'Draft',
+            EffectiveDate = Date.today(),
+            // essential for the creation of OrderItem
+            Pricebook2Id =  pricebook.Id //Required
+            //TotalAmount = not writable This is Why Order links to a Product2 with OrderItem
+        );
+        Order orderConstructed2 = new Order(
+            Name = orderName+'2',
+            AccountId = accountIdForDeletion, //Required
+            ContractId = contractDoomed.Id,
+            Status = 'Draft',
+            EffectiveDate = Date.today(),
+            // essential for the creation of OrderItem
+            Pricebook2Id =  pricebook.Id //Required
+            //TotalAmount = not writable This is Why Order links to a Product2 with OrderItem
+        );
+        orderList.add(orderConstructed1);
+        orderList.add(orderConstructed2);
+        insert orderList;
+        System.debug('orderbeforeInsert list '+orderbeforeInsert.size());
+        Order doomedOrder = [SELECT Id, Name, AccountId
+                            FROM Order
+                            WHERE AccountId = :accountIdForDeletion
+                            LIMIT 1];
+        Test.startTest();
+            delete doomedOrder;
+        Test.stopTest();
+
+        List<Order> orderToInsert = OrderGet.getOrdersAll();
+        System.debug('Contract list '+contractListToCreateOrders);
+        System.debug('Pricebook '+pricebook);
+
+        System.debug('Order list '+orderToInsert);
+        System.debug('order after insert list '+orderToInsert.size());
+
+        List<Account> accountList = AccountGet.getAccountActiveFalse();
+
+        System.assertEquals(1, accountList.size(), 'After deleting records on Order, Account field Active__c should be updated to flase, if Account not linked to an Order.');
     }
 }

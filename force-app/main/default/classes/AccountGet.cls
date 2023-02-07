@@ -7,7 +7,7 @@
 **/
 public with sharing class AccountGet {
 
-    public static Account getAccount(String accountName){
+    public static Account getAccountByName(String accountName){
         
         Account accountToReturn;
         checkPermissionAccount();
@@ -61,7 +61,34 @@ public with sharing class AccountGet {
                                 WHERE Active__c = true];
         return accoutListToReturn;
     }
-
+    public static List<Account> getAccountActiveFalse(){
+        List<Account> accoutListToReturn = new List<Account>();
+        checkPermissionAccount();
+        accoutListToReturn = [SELECT Id,
+                                     Name,
+                                     Active__c
+                                FROM Account
+                                WHERE Active__c = false];
+        return accoutListToReturn;
+    }
+    public static List<Account> getAccontsNOTLinkedToOrders(Set<Id> accountIDSetOfAllDeletedOrders){
+        List<ID> accountIDListOfAllDeletedOrders = new List<ID>(accountIDSetOfAllDeletedOrders);
+        List<Order> orderList = OrderGet.getOrdersAll();
+        List<ID> accountIDListOfAllOrders = new List<ID>();
+        for(Order orderCurent : orderList){
+            if(!accountIDListOfAllOrders.contains(orderCurent.AccountId)){
+                accountIDListOfAllOrders.add(orderCurent.AccountId);
+            }
+        }
+        checkPermissionAccount();
+        List<Account> accoutListToReturn =[SELECT Id,
+                                                    Name,
+                                                    Active__c
+                                            FROM Account
+                                            WHERE Id NOT IN :accountIDListOfAllOrders
+                                            AND Id IN :accountIDListOfAllDeletedOrders];
+        return accoutListToReturn;
+    }
     private static void checkPermissionAccount(){
         if( !Account.SObjectType.getDescribe().isAccessible() 
             || !Schema.SObjectType.Account.fields.Name.isAccessible()

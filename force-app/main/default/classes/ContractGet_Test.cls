@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-23-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 07-02-2023
+ * @last modified by  : Muriel Proton
 **/
 @isTest
 public with sharing class ContractGet_Test {
@@ -28,7 +28,7 @@ public with sharing class ContractGet_Test {
     public static void testGetContractsOfAccount(){
 
         String accountName = 'AccountName-0';
-        Id accountId = AccountGet.getAccount(accountName).Id;
+        Id accountId = AccountGet.getAccountByName(accountName).Id;
 
         Test.startTest();
         List<Contract> contractsListToTest = ContractGet.getContractsOfAccount(accountId);

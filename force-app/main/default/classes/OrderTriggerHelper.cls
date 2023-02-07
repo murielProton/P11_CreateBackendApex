@@ -35,17 +35,22 @@ public with sharing class OrderTriggerHelper {
         List<Account> accountListToUpdate = new List<Account>(accountSetToUpdate);
 
         // update this list
-        AccountUpdate.updateAccountFieldActiveTrue(accountListToUpdate);
+        AccountUpdate.updateAccountFieldActiveToTrue(accountListToUpdate);
     }
 
+    //USE in Trigger After DELETE
     public static void updateAccountActiveIfOrderDelete(List<Order> orderList){
-        // get the right list to update
-        Set<Account> accountSetToUpdate = AccountGet.getAccontsLinkedToOrders(orderList);
+        // get the list of Accounts of the deleted Orders
+        Set<Account> accountsSetOfDeletedOrders = AccountGet.getAccontsLinkedToOrders(orderList);
+        Set<ID> accountIDSetOfAllDeletedOrders = new  Set<ID>();
+        for(Account accountCurent : accountsSetOfDeletedOrders){
+            accountIDSetOfAllDeletedOrders.add(accountCurent.Id);
+        }
 
-
-
-        // update this list
-        AccountUpdate.updateAccountFieldActiveFalse(accountListToUpdate);
+         // Get the list of Accounts that have NO Orders Linked to them
+         List<Account> accountListToUpdateActiveToFalse = AccountGet.getAccontsNOTLinkedToOrders(accountIDSetOfAllDeletedOrders);
+        // update this List Account Field Active__c to False
+        AccountUpdate.updateAccountFieldActiveToFalse(accountListToUpdateActiveToFalse);
         System.debug('etape update account faite !');
     }
 }  
