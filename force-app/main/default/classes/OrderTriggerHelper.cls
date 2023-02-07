@@ -28,13 +28,24 @@ public with sharing class OrderTriggerHelper {
             orderToAddErrorTo.addError('Avant de pouvoir passer le statut à /"Activated/" de '+orderCurent.Name+', il doit être associé à un produit (Product2).');
         }
     }
+    
     public static void updateAccountActiveIfLinkedToOrder(List<Order> orderList){
         // get the right list to update
         Set<Account> accountSetToUpdate = AccountGet.getAccontsLinkedToOrders(orderList);
         List<Account> accountListToUpdate = new List<Account>(accountSetToUpdate);
 
         // update this list
-        AccountUpdate.updateAccountFieldActive(accountListToUpdate);
+        AccountUpdate.updateAccountFieldActiveTrue(accountListToUpdate);
     }
 
+    public static void updateAccountActiveIfOrderDelete(List<Order> orderList){
+        // get the right list to update
+        Set<Account> accountSetToUpdate = AccountGet.getAccontsLinkedToOrders(orderList);
+
+
+
+        // update this list
+        AccountUpdate.updateAccountFieldActiveFalse(accountListToUpdate);
+        System.debug('etape update account faite !');
+    }
 }  
