@@ -51,6 +51,16 @@ public with sharing class AccountGet {
         Set<Account> accoutSetToReturn  = new Set<Account>(accoutListToReturn);
         return accoutSetToReturn;
     }
+    public static List<Account> getAccountActiveTrue(){
+        List<Account> accoutListToReturn = new List<Account>();
+        checkPermissionAccount();
+        accoutListToReturn = [SELECT Id,
+                                     Name,
+                                     Active__c
+                                FROM Account
+                                WHERE Active__c = true];
+        return accoutListToReturn;
+    }
 
     private static void checkPermissionAccount(){
         if( !Account.SObjectType.getDescribe().isAccessible() 

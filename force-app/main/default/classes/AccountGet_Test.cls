@@ -65,9 +65,20 @@ public with sharing class AccountGet_Test {
         }
         
         Test.startTest();
-        Set<Account> accountsListToTest = AccountGet.getAccontsByIds(accountIDSet);
+        Set<Account> accountsSetToTest = AccountGet.getAccontsByIds(accountIDSet);
         Test.stopTest();
 
-        System.assertEquals( accountList.size(), accountsListToTest.size(),'AccountGet.getAccontsByIds(accountIDSet) should return a list of five records.');
+        System.assertEquals( accountList.size(), accountsSetToTest.size(),'AccountGet.getAccontsByIds(accountIDSet) should return a list of five records.');
+    }
+    @isTest
+    public static void testGetAccountActiveTrue(){
+        List<Account> accountList = AccountGet.getAccountsAll();
+        AccountUpdate.updateAccountFieldActive(accountList);
+        
+        Test.startTest();
+        List<Account> accountsListToTest = AccountGet.getAccountActiveTrue();
+        Test.stopTest();
+
+        System.assertEquals( accountList.size(), accountsListToTest.size(),'AccountGet.getAccountActiveTrue() should return a list of five records.');
     }
 }
