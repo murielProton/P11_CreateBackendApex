@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 06-02-2023
+ * @last modified on  : 07-02-2023
  * @last modified by  : Muriel Proton
 **/
 public with sharing class OrderTriggerHelper {
@@ -17,7 +17,6 @@ public with sharing class OrderTriggerHelper {
         List<Order> oderListUnupdatable = OrderFilter.orderListFilterNOTLinkedToProduct2(orderListStatusChanged);
         // send error messages 
         displayMessageForEachOrderNotValid(oderListUnupdatable, orderMapNew);
-
     }
 
     /* Methode has to be used within a condition or with a specified list */
@@ -28,6 +27,14 @@ public with sharing class OrderTriggerHelper {
             Order orderToAddErrorTo = orderMapNew.get(orderCurent.Id);
             orderToAddErrorTo.addError('Avant de pouvoir passer le statut à /"Activated/" de '+orderCurent.Name+', il doit être associé à un produit (Product2).');
         }
+    }
+    public static void updateAccountActiveIfLinkedToOrder(List<Order> orderList){
+        // get the right list to update
+        Set<Account> accountSetToUpdate = AccountGet.getAccontsLinkedToOrders(orderList);
+        List<Account> accountListToUpdate = new List<Account>(accountSetToUpdate);
+
+        // update this list
+        AccountUpdate.updateAccountFieldActive(accountListToUpdate);
     }
 
 }  

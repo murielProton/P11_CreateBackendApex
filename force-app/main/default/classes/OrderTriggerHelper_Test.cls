@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 06-02-2023
+ * @last modified on  : 07-02-2023
  * @last modified by  : Muriel Proton
 **/
 @isTest
@@ -75,7 +75,7 @@ public with sharing class OrderTriggerHelper_Test {
             orderItemsList.add(OrderItemDataFactory.constructOneOrderItem(orderCurent.Id, product2ForThisTest.Id, pricebookEntryForThisTest.Id));
         }
         insert orderItemsList;
-        List<Order> orderListForTest = OrderGet.getOrdersAll();
+        
 
     }
 
@@ -85,5 +85,16 @@ public with sharing class OrderTriggerHelper_Test {
         // And one record cannot have 2 different values, at the same time, 'Activated' and 'Draft'.
         // must be tested with trigger
     }
+    @isTest
+    public static void testUpdateAccountActiveIfLinkedToOrder(){
+        List<Order> orderListForTest = OrderGet.getOrdersAll();
 
+        Test.startTest();
+        OrderTriggerHelper.updateAccountActiveIfLinkedToOrder(orderListForTest);
+        Test.stopTest();
+
+        List<Account> accountListToTest = AccountGet.getAccountActiveTrue();
+        
+        System.assertEquals(1, accountListToTest.size(), 'AccountUpdate.updateAccountActiveIfLinkedToOrder(List<Order>) should update Accounts fields Active__c.');
+    }
 }
