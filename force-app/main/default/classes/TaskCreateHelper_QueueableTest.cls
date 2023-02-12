@@ -55,4 +55,18 @@ public with sharing class TaskCreateHelper_QueueableTest {
 
         System.assertEquals( 1, accountsIdListToTest.size(),'TaskCreateHelper_Queueable.filterAccountListForNotLinkedToTasksNorOrders(<Account>) should return 1 Account.');
     }
+    
+    @isTest
+    public static void testConstructOneTask(){
+
+        Id accountId = AccountGet.getAccountsAll()[0].Id;
+
+        Test.startTest();
+        Task taskToTest = TaskCreateHelper_Queueable.constructOneTask(accountId);
+        Test.stopTest();
+
+        System.debug('task = '+taskToTest);
+        System.debug('task reminder date time = '+taskToTest.ReminderDateTime);
+        System.assertEquals(accountId, taskToTest.WhatId, 'TaskCreateHelper_Queueable.constructTask should construct one Task.');
+    }
 }

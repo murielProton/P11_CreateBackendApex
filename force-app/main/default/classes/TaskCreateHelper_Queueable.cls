@@ -26,11 +26,15 @@ public with sharing class TaskCreateHelper_Queueable {
     }
 
     public static Task constructOneTask(Id accountId){
+        
+        DateTime today = DateTime.now();
+
         Task task = new Task(
             Subject = 'Call',
             Status = 'New',
             Priority = 'Normal',
             IsReminderSet = true,
+            ReminderDateTime = today.addDays(5),
             WhatId = accountId
         );
         return task;
