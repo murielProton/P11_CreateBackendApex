@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 07-02-2023
+ * @last modified on  : 12-02-2023
  * @last modified by  : Muriel Proton
 **/
 public with sharing class OrderTriggerHandler extends TriggerHandler {
@@ -36,6 +36,5 @@ public with sharing class OrderTriggerHandler extends TriggerHandler {
         If no The field Account.Active__c = false
         */
         OrderTriggerHelper.updateAccountActiveIfOrderDelete(orderListOld);
-       /* OrderTriggerHelper. TODO sendErrorOnOrder(orderMapOld, orderMapNew);*/
     }
 }

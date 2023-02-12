@@ -26,6 +26,25 @@ public with sharing class OrderGet {
         return orderList;
     }
 
+    public static List<Order> getOrdersWhereStatusActivated(){
+
+        List<Order> orderList = new List<Order>();
+
+        if(Order.SObjectType.getDescribe().isAccessible() &&
+        Schema.SObjectType.Order.fields.Name.isAccessible() &&
+        Schema.SObjectType.Order.fields.Status.isAccessible()){
+            orderList = [SELECT Id,
+                                Name,
+                                AccountId,
+                                Status
+                        FROM Order
+                        WHERE Status = 'Activated'];
+        } else {
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an Order reccord.');
+        }
+        return orderList;
+    }
+
     public static List<Order> getOrderWithOrderItem(List<id> orderIdList){
         List<Order> orderListToReturn = [SELECT Id,
                                                 Name,
@@ -56,4 +75,5 @@ public with sharing class OrderGet {
         return orderList;
         
     }
+
 }

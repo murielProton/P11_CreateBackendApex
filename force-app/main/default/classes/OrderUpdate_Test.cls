@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 03-02-2023
+ * @last modified on  : 12-02-2023
  * @last modified by  : Muriel Proton
 **/
 @isTest
@@ -60,17 +60,15 @@ public with sharing class OrderUpdate_Test {
     @isTest
     static void testUpdateOrdersStatusToActivated(){
         
-        List<Order> orderListForTest = OrderGet.getOrdersAll();
+        List<Order> orderListForUpdate = OrderGet.getOrdersAll();
         
         Test.startTest();
-
-        try{
-            OrderUpdate.updateOrdersStatusToActivated(orderListForTest);
-            System.assert(false, 'An exception message should have been triggered.');
-        }catch(DMLException e){
-            System.assert(e != null && e.getMessage().contains(', il doit être associé à un produit (Product2).'), 'An exception message should have been triggered.');
-        }
+            OrderUpdate.updateOrdersStatusToActivated(orderListForUpdate);
         Test.stopTest();
+            
+        List<Order> orderListToTest = OrderGet.getOrdersWhereStatusActivated();
+
+        System.assertEquals(10, orderListToTest.size(), 'OrderGet.getOrdersWhereStatusActivated() should update the Order List whith Status set Activated.');
     }
     
 }
