@@ -89,24 +89,6 @@ public with sharing class AccountGet {
                                             AND Id IN :accountIDListOfAllDeletedOrders];
         return accoutListToReturn;
     }
-    /*FOR BATCH Tested Clear*/
-    public static List<Account> getAccountWithOrdersAndTaskList(){
-
-        checkPermissionAccount();
-
-        List<Account> accountRecordsList = [SELECT Name, (SELECT Id,
-                                                                 Subject,
-                                                                 Status,
-                                                                 Priority,
-                                                                 IsReminderSet,
-                                                                 WhatId 
-                                                            FROM Tasks), 
-                                                          (SELECT Name, 
-                                                                  AccountId 
-                                                           FROM Orders) 
-                                            FROM Account];
-        return accountRecordsList; 
-    }
     
     private static void checkPermissionAccount(){
         if( !Account.SObjectType.getDescribe().isAccessible() 

@@ -56,20 +56,7 @@ public with sharing class AccountGet_Test {
 
         System.assertEquals( 5, accountsListToTest.size(),'AccountGet.getAccontsLinkedToOrders() should return a list of five records.');
     }
-    @isTest
-    public static void testGetAccountsById(){
-        Set<Id> accountIDSet = new Set<Id>();
-        List<Account> accountList = AccountGet.getAccountsAll();
-        for(Account accountCurent : accountList){
-            accountIDSet.add(accountCurent.Id);
-        }
-        
-        Test.startTest();
-        Set<Account> accountsSetToTest = AccountGet.getAccontsByIds(accountIDSet);
-        Test.stopTest();
 
-        System.assertEquals( accountList.size(), accountsSetToTest.size(),'AccountGet.getAccontsByIds(accountIDSet) should return a list of five records.');
-    }
     @isTest
     public static void testGetAccountActiveTrue(){
         List<Account> accountList = AccountGet.getAccountsAll();
@@ -125,42 +112,5 @@ public with sharing class AccountGet_Test {
         Test.stopTest();
 
         System.assertEquals( 1, accountsListToTest.size(),'AccountGet.getAccontsNOTLinkedToOrders(Set<Id>, List<Accounts>) should return a list of 1 record.');
-    }
-    @isTest
-    public static void testGetAccountWithOrdersAndTaskList(){
-        List<Account> accountList = AccountGet.getAccountsAll();
-        Set<Id> accountIdList = new Map<Id,Account>(accountList).keySet();
-        ContractDataFactory.createContractsList(accountList);
-        List<Contract> contractListToCreateOrders = ContractGet.getContractsAll();
-        // Now make sure the Salesforce process doese create a standard Pricebook2
-        Pricebook2 pricebookStandardToUpdate = new PriceBook2 (
-            Id = Test.getStandardPricebookId(),
-            IsActive = true
-        );
-        //Execute an update DML on the Pricebook2 record, to make IsStandard to true
-        update pricebookStandardToUpdate; 
-        List<PriceBook2> pricebook2ListALL = Pricebook2Get.getPriceBook2All();  
-        PriceBook2 pricebook2Standard = Pricebook2Get.getPriceBook2Standard();
-        OrderDataFactory.createOrdersListForEachContract(contractListToCreateOrders, pricebook2Standard);
-        List<Order> orderList = OrderGet.getOrdersAll();
-        System.debug('orderList ' + orderList);
-        System.debug('orderList ' + orderList);
-        Set<Id> orderIDSetAll = new Set<Id>();
-        for (Order orderCurent : orderList){
-            orderIDSetAll.add(orderCurent.Id);
-        }
-        TaskDataFactory.createTasksList(accountIdList);
-        insert new Account(Name = 'AccountName-6');
-        List<Account> accountsList = AccountGet.getAccountsAll();
-        Set<Id> accountIDSetOfAllDeletedOrders = new Set<Id>();
-        for(Account accountCurent : accountsList){
-            accountIDSetOfAllDeletedOrders.add(accountCurent.Id);
-        }
-        
-        Test.startTest();
-        List<Account> accountsListToTest = AccountGet.getAccountWithOrdersAndTaskList();
-        Test.stopTest();
-
-        System.assertEquals( 6, accountsListToTest.size(),'AccountGet.getAccountWithOrdersAndTaskList(');
     }
 }

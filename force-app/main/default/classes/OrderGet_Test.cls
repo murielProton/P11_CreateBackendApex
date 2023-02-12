@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-31-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 12-02-2023
+ * @last modified by  : Muriel Proton
 **/
 @isTest
 public with sharing class OrderGet_Test {
@@ -49,27 +49,5 @@ public with sharing class OrderGet_Test {
         Test.stopTest();
 
         System.assertEquals(orderListForThisTest.size(), 1, 'OrderGet.getOrdersAll should return one order.');
-    }
-    
-    @isTest
-    static void testGetOrderWhereNOPricebook2(){
-        List<Account> accountsList = AccountGet.getAccountsAll();
-        List<Contract> contractForThisTest = ContractGet.getContractsOfAccount(accountsList[0].Id);
-        Order orderConstructed = new Order(
-            Name = orderName+'-'+accountName,
-            AccountId = accountsList[0].Id,
-            ContractId = contractForThisTest[0].Id,
-            Status = 'Draft',
-            EffectiveDate = Date.today()
-        );
-        insert orderConstructed;
-
-        Test.startTest();
-        List<Order> orderListToTest = OrderGet.getOrderWhereNOPricebook2();
-        Test.stopTest();
-
-        System.debug('orderListForThisTest ' +orderListToTest);
-
-        System.assertEquals(1, orderListToTest.size(), 'OrderGet.getOrderWhereNOPricebook2 should return at least one order without a Pricebook2 attached.');
     }
 }

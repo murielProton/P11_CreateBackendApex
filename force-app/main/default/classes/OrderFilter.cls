@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 06-02-2023
+ * @last modified on  : 12-02-2023
  * @last modified by  : Muriel Proton
 **/
 public with sharing class OrderFilter {
@@ -19,22 +19,6 @@ public with sharing class OrderFilter {
         return new List<Order>(orderSetToReturn);
     }
 
-    public static List<Order> orderListFilterLinkedToProduct2(List<Order> orderList) {
-        //Declare the List to return
-        List<Order> orderListToReturn = new List<Order>();
-        // transform a list of orders into a list of orders id
-        List<Id> orderIdList = new List<Id>(new Map<Id, SObject> (orderList).keySet());
-        // return a List of OrderItems when the OrderItem is linked to a Product2 and an Order
-        List<Order> orderWithOrderItem = OrderGet.getOrderWithOrderItem(orderIdList);
-
-        // transforme it into a Set of Order
-        for(Order orderCurent : orderWithOrderItem){
-            if(orderCurent.orderItems.size() > 0){
-                orderListToReturn.add(orderCurent);
-            }
-        }
-        return orderListToReturn;
-    }
     public static List<Order> orderListFilterNOTLinkedToProduct2(List<Order> orderList) {
         //Declare the List to return
         List<Order> orderListToReturn = new List<Order>();

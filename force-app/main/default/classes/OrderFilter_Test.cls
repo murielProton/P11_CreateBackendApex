@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-31-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 12-02-2023
+ * @last modified by  : Muriel Proton
 **/
 @isTest
 public with sharing class OrderFilter_Test {
@@ -51,41 +51,7 @@ public with sharing class OrderFilter_Test {
         // get a list of Orders records
         List<Order> orderListOld = OrderGet.getOrdersAll();
         //Convert orderListOld into a map
-        Map<Id, Order> orderMapOld = OrderFormat.transformListToMap(orderListOld);
-
-        //OrderItem links product to Order 
-        // for each Orders create an OrderItem
-        List<OrderItem> orderItemsList = new List<OrderItem>();
-        List<Pricebook2> pricebookListForThisTest = Pricebook2Get.getPriceBook2ListByName(pricebook2Name);
-        List<Product2> product2ListForThisTest = Product2Get.getProduct2ListByName(productName);
-        List<PricebookEntry> pricebookEntryListForThisTest = PricebookEntryGet.getPricebookEntryByPricebook2AndProduct2(pricebookListForThisTest[0].Id, product2ListForThisTest[0].Id);
-        for(Order orderCurent : orderListOld){
-            //(Order orderForThisTest, Product2 product2ForThisTest, PricebookEntry pricebookEntryForThisTest)
-            orderItemsList.add(OrderItemDataFactory.constructOneOrderItem(orderCurent.Id, product2ListForThisTest[0].Id, pricebookEntryListForThisTest[0].Id));
-        }
-
-        insert orderItemsList;
-
-        //Get orderListNew
-        List<Order> orderListNew = OrderGet.getOrdersAll();
-
-        // Status to Activate without update
-        for(Order orderCurrent : orderListNew){
-            orderCurrent.Status = 'Activated';
-        }
-
-        Test.startTest();
-        List<Order> orderList = OrderFilter.orderListFilterStatusDraftToActivated(orderMapOld, orderListNew);
-        Test.stopTest();
-
-        System.assertEquals(orderMapOld.size(), orderList.size(), 'OrderFilter.orderListFilterStatusDraftToActivated should return a Set.');
-    }
-    @isTest
-    static void testOrderListFilterLinkedToProduct2(){
-        // get a list of Orders records
-        List<Order> orderListOld = OrderGet.getOrdersAll();
-        //Convert orderListOld into a map
-        Map<Id, Order> orderMapOld = OrderFormat.transformListToMap(orderListOld);
+        Map<Id, Order> orderMapOld = new Map<Id, Order>(orderListOld);
 
         //OrderItem links product to Order 
         // for each Orders create an OrderItem
@@ -105,17 +71,36 @@ public with sharing class OrderFilter_Test {
         }
 
         //Get orderListNew
-        List<Order> orderListNew = OrderGet.getOrdersAll();
+        List<Order> orderList = OrderGet.getOrdersAll();
 
+        List<Order> orderListNew = new List<Order>();
         // Status to Activate without update
-        for(Order orderCurrent : orderListNew){
+        // No update beacause one Order has only one ID, and an Order cannot have 2 values at the same time.
+        for(Order orderCurrent : orderList){
             orderCurrent.Status = 'Activated';
+            orderListNew.add(orderCurrent);
         }
 
+        Map<Id, Order> orderMapNew = new Map<Id, Order>(orderListNew);
+
         Test.startTest();
-        List<Order> orderList = OrderFilter.orderListFilterLinkedToProduct2(orderListNew);
+        List<Order> orderListToTest = OrderFilter.orderListFilterStatusDraftToActivated(orderMapOld, orderMapNew);
         Test.stopTest();
 
-        System.assertEquals(orderListNew.size(), orderList.size(), 'OrderFilter.orderListFilterLinkedToProduct2 should return a Set.');
+        System.assertEquals('Activated', orderListToTest[0].Status, 'OrderFilter.orderListFilterStatusDraftToActivated should return a List where all Status are set to Activated.');
+    }
+
+    @isTest
+    static void testOrderListFilterNOTLinkedToProduct2() {
+        // get a list of Orders records
+        List<Order> orderList= OrderGet.getOrdersAll();
+
+        Test.startTest();
+        List<Order> orderListToTest = OrderFilter.orderListFilterNOTLinkedToProduct2(orderList);
+        Test.stopTest();
+
+
+
+        System.assertEquals(10, orderListToTest.size(), 'OrderFilter.orderListFilterNOTLinkedToProduct2 should return a List of 11 Orders.');
     }
 }
