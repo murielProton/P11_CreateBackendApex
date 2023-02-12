@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 03-02-2023
+ * @last modified on  : 12-02-2023
  * @last modified by  : Muriel Proton
 **/
 public with sharing class OrderGet {
@@ -55,7 +55,6 @@ public with sharing class OrderGet {
                                 WHERE Id IN: orderIdList];
         return orderListToReturn;
     }
-
     public static List<Order> getOrderByAccountAndContract(Id accountId, Id contractId){
         List<Order> orderList = new List<Order>();
 

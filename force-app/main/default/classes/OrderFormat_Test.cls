@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-31-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 09-02-2023
+ * @last modified by  : Muriel Proton
 **/
 @isTest
 public with sharing class OrderFormat_Test {
@@ -73,5 +73,18 @@ public with sharing class OrderFormat_Test {
         Test.stopTest();
 
         System.assertEquals(orderSetForTest.size(), orderlistToTest.size(), 'OrderFilter.transformSetToList should return a List of the same size as the Set it received as parameter.');
+    }
+    @isTest
+    public static void orderFormatTest(){
+        // get a list of Orders
+        List<Order> orderList0 = OrderGet.getOrdersAll();
+        System.debug('List of Orders 0 '+orderList0);
+        // transform a list of Orders into a Set of Ids
+        Set<Id> orderIdSet = new Map<Id,Order>(orderList0).keySet();
+        System.debug('Set of Orders 0 '+orderIdSet);
+        // transform a list of Orders into a List of ID
+        List<Id> orderIdList = new List<Id>(new Map<Id,Order>(orderList0).keySet());
+        System.debug('List of Orders 1 '+orderIdList);
+        // for all that is not Id please use a for loop
     }
 }

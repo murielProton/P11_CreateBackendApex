@@ -24,6 +24,9 @@ SobjectNameFormat -> contains all the methodes used to convert a type to an othe
 SobjectNameGet -> contains all the methodes used to get reccords, using SOQL.
 SobjectNameFilter -> contains all the methodes to filter throught the cited type. 
 SobjectNameDataFactory -> contains all the methodes that generates records for the tests.
+SobjectNameActionHelper_Queueable -> will regroup all methodes used by the _Queueable class, disregarding code duplication. _Queueable stands for automaticaly scheduled Batch.
+SobjectNameAction_Queueable -> Contains the methode start(), execute(), finish().  _Queueable stands for automaticaly launch code.
+SobjectNameActionExecute_Queueable -> Calls on, and instantiate _Queueable.  _Queueable stands for automaticaly launch code.
 All tests methodes begin by test.
 setupClassName -> design pattern for all setup methode begining a test class
 # CRUD DML

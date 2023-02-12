@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 07-02-2023
+ * @last modified on  : 12-02-2023
  * @last modified by  : Muriel Proton
 **/
 public with sharing class AccountGet {
@@ -89,6 +89,25 @@ public with sharing class AccountGet {
                                             AND Id IN :accountIDListOfAllDeletedOrders];
         return accoutListToReturn;
     }
+    /*FOR BATCH Tested Clear*/
+    public static List<Account> getAccountWithOrdersAndTaskList(){
+
+        checkPermissionAccount();
+
+        List<Account> accountRecordsList = [SELECT Name, (SELECT Id,
+                                                                 Subject,
+                                                                 Status,
+                                                                 Priority,
+                                                                 IsReminderSet,
+                                                                 WhatId 
+                                                            FROM Tasks), 
+                                                          (SELECT Name, 
+                                                                  AccountId 
+                                                           FROM Orders) 
+                                            FROM Account];
+        return accountRecordsList; 
+    }
+    
     private static void checkPermissionAccount(){
         if( !Account.SObjectType.getDescribe().isAccessible() 
             || !Schema.SObjectType.Account.fields.Name.isAccessible()
