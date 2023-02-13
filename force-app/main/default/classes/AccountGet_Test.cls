@@ -112,8 +112,6 @@ public with sharing class AccountGet_Test {
         PriceBook2 pricebook2Standard = Pricebook2Get.getPriceBook2Standard();
         OrderDataFactory.createOrdersListForEachContract(contractListToCreateOrders, pricebook2Standard);
         List<Order> orderList = OrderGet.getOrdersAll();
-        System.debug('orderList ' + orderList);
-        System.debug('orderList ' + orderList);
         Set<Id> orderIDSetAll = new Set<Id>();
         for (Order orderCurent : orderList){
             orderIDSetAll.add(orderCurent.Id);

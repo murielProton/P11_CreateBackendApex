@@ -51,6 +51,5 @@ public with sharing class OrderTriggerHelper {
          List<Account> accountListToUpdateActiveToFalse = AccountGet.getAccontsNOTLinkedToOrders(accountIDSetOfAllDeletedOrders);
         // update this List Account Field Active__c to False
         AccountUpdate.updateAccountFieldActiveToFalse(accountListToUpdateActiveToFalse);
-        System.debug('etape update account faite !');
     }
 }  

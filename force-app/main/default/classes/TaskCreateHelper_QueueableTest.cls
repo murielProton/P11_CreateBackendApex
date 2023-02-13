@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Muriel Proton
  * @group             : 
- * @last modified on  : 12-02-2023
+ * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
 **/
 @isTest
@@ -28,8 +28,7 @@ public with sharing class TaskCreateHelper_QueueableTest {
         PriceBook2 pricebook2Standard = Pricebook2Get.getPriceBook2Standard();
         OrderDataFactory.createOrdersListForEachContract(contractListToCreateOrders, pricebook2Standard);
         List<Order> orderList = OrderGet.getOrdersAll();
-        System.debug('orderList ' + orderList);
-        System.debug('orderList ' + orderList);
+
         Set<Id> orderIDSetAll = new Set<Id>();
         for (Order orderCurent : orderList){
             orderIDSetAll.add(orderCurent.Id);
@@ -47,7 +46,6 @@ public with sharing class TaskCreateHelper_QueueableTest {
     public static void testFilterAccountListForNotLinkedToTasksNorOrders(){
 
         List<Account> accountRecordsList = AccountGet.getAccountsAll();
-        System.debug('Liste Account taille ' +accountRecordsList.size());
 
         Test.startTest();
         List<Id> accountsIdListToTest = TaskCreateHelper_Queueable.filterAccountListForNotLinkedToTasksNorOrders(accountRecordsList);
@@ -64,9 +62,7 @@ public with sharing class TaskCreateHelper_QueueableTest {
         Test.startTest();
         Task taskToTest = TaskCreateHelper_Queueable.constructOneTask(accountId);
         Test.stopTest();
-
-        System.debug('task = '+taskToTest);
-        System.debug('task reminder date time = '+taskToTest.ReminderDateTime);
+        
         System.assertEquals(accountId, taskToTest.WhatId, 'TaskCreateHelper_Queueable.constructTask should construct one Task.');
     }
 }

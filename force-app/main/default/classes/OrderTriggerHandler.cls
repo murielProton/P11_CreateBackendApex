@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 12-02-2023
+ * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
 **/
 public with sharing class OrderTriggerHandler extends TriggerHandler {
@@ -16,7 +16,6 @@ public with sharing class OrderTriggerHandler extends TriggerHandler {
         /*If Account is linked To the Order
         AND If the checkbox 'Active' on Account is not checked
         check the checkbox 'Active'*/
-        System.debug('I am in Handler');
         OrderTriggerHelper.updateAccountActiveIfLinkedToOrder(orderListNew);
     }
     public override void beforeUpdate() {

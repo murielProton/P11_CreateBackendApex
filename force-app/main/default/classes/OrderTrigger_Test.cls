@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Muriel Proton
  * @group             : 
- * @last modified on  : 07-02-2023
+ * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
 **/
 @isTest
@@ -125,7 +125,6 @@ public with sharing class OrderTrigger_Test {
         List<Contract> contractListToCreateOrders = ContractGet.getContractsAll();
         PriceBook2 pricebook = Pricebook2Get.getPriceBook2Standard();
         List<Order> orderbeforeInsert = OrderGet.getOrdersAll();
-        System.debug('orderbeforeInsert list '+orderbeforeInsert.size());
 
         List<Order> orderList = new List<Order>();
         Order orderConstructed = new Order(
@@ -139,17 +138,12 @@ public with sharing class OrderTrigger_Test {
             //TotalAmount = not writable This is Why Order links to a Product2 with OrderItem
         );
         orderList.add(orderConstructed);
-        System.debug('orderbeforeInsert list '+orderbeforeInsert.size());
+        
         Test.startTest();
             insert orderList;
         Test.stopTest();
 
         List<Order> orderToInsert = OrderGet.getOrdersAll();
-        System.debug('Contract list '+contractListToCreateOrders);
-        System.debug('Pricebook '+pricebook);
-
-        System.debug('Order list '+orderToInsert);
-        System.debug('order after insert list '+orderToInsert.size());
 
         List<Account> accountList = AccountGet.getAccountActiveTrue();
 
@@ -161,7 +155,7 @@ public with sharing class OrderTrigger_Test {
 
         PriceBook2 pricebook = Pricebook2Get.getPriceBook2Standard();
         List<Order> orderbeforeInsert = OrderGet.getOrdersAll();
-        System.debug('orderbeforeInsert list '+orderbeforeInsert.size());
+        
         insert new Account(Name = 'AccountName-6');
         Account account6 = AccountGet.getAccountByName('AccountName-6');
         Id accountIdForDeletion = account6.Id;
@@ -202,7 +196,7 @@ public with sharing class OrderTrigger_Test {
         orderList.add(orderConstructed1);
         orderList.add(orderConstructed2);
         insert orderList;
-        System.debug('orderbeforeInsert list '+orderbeforeInsert.size());
+
         Order doomedOrder = [SELECT Id, Name, AccountId
                             FROM Order
                             WHERE AccountId = :accountIdForDeletion
@@ -212,12 +206,6 @@ public with sharing class OrderTrigger_Test {
         Test.stopTest();
 
         List<Order> orderToInsert = OrderGet.getOrdersAll();
-        System.debug('Contract list '+contractListToCreateOrders);
-        System.debug('Pricebook '+pricebook);
-
-        System.debug('Order list '+orderToInsert);
-        System.debug('order after insert list '+orderToInsert.size());
-
         List<Account> accountList = AccountGet.getAccountActiveFalse();
 
         System.assertEquals(1, accountList.size(), 'After deleting records on Order, Account field Active__c should be updated to flase, if Account not linked to an Order.');

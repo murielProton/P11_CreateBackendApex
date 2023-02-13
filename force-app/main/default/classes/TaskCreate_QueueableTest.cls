@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Muriel Proton
  * @group             : 
- * @last modified on  : 12-02-2023
+ * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
 **/
 @isTest
@@ -25,8 +25,7 @@ public with sharing class TaskCreate_QueueableTest {
         PriceBook2 pricebook2Standard = Pricebook2Get.getPriceBook2Standard();
         OrderDataFactory.createOrdersListForEachContract(contractListToCreateOrders, pricebook2Standard);
         List<Order> orderList = OrderGet.getOrdersAll();
-        System.debug('orderList ' + orderList);
-        System.debug('orderList ' + orderList);
+        
         Set<Id> orderIDSetAll = new Set<Id>();
         for (Order orderCurent : orderList){
             orderIDSetAll.add(orderCurent.Id);
