@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-23-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 13-02-2023
+ * @last modified by  : Muriel Proton
 **/
 public with sharing class PricebookEntryGet {
     // Product must be active and added to Pricebook first
@@ -24,7 +24,7 @@ public with sharing class PricebookEntryGet {
                                         WHERE Pricebook2Id = :pricebookIdForThisTest AND Product2Id = :product2IdForThisTest
                                         ];
         }else{
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get a PricebookEntry reccord.');
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get a PricebookEntry record.');
         }
         return pricebookEntryListToReturn;
     }

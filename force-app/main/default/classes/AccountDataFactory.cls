@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-15-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 13-02-2023
+ * @last modified by  : Muriel Proton
 **/
 public with sharing class AccountDataFactory {
     
@@ -13,7 +13,7 @@ public with sharing class AccountDataFactory {
             accountsListToInsertForTest.add(new Account(Name = 'AccountName-'+i));
         }
         if (Schema.sObjectType.Account.fields.Name.isCreateable() == false) {
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert an Account reccord.');
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert an Account record.');
         }else{
             insert accountsListToInsertForTest;
         }

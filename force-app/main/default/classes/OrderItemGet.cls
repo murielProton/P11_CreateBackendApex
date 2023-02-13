@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 12-02-2023
+ * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
  * OrderItem are linked to a Product2 by default. It is impossible to creat a record on OrderItem without a Product2 and a PricebookEntry.
 **/
@@ -21,7 +21,7 @@ public with sharing class OrderItemGet {
                                 PricebookEntryId
                         FROM OrderItem];
         } else {
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an OrderItem reccord.');
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an OrderItem record.');
         }
         return orderItemList;
         

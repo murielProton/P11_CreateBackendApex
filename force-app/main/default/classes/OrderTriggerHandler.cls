@@ -30,9 +30,9 @@ public with sharing class OrderTriggerHandler extends TriggerHandler {
     public override void afterDelete() {
         /*In an after delete Trigger you have only the OldList or OldMap !!!
         When a record on Order is deleted
-        Check if the Account linked to it has any other Orders on it
-        If yes The field Account.Active__c = true
-        If no The field Account.Active__c = false
+        Is the Account, linked to it, has any other Orders on it ?
+        If yes, The field Account.Active__c = true
+        If no, The field Account.Active__c = false
         */
         OrderTriggerHelper.updateAccountActiveIfOrderDelete(orderListOld);
     }

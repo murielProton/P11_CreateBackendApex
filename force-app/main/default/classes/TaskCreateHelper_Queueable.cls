@@ -2,11 +2,11 @@
  * @description       : 
  * @author            : Muriel Proton
  * @group             : 
- * @last modified on  : 12-02-2023
+ * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
 **/
 /*Collect the batches of records or objects to be passed to execute
-        If Account reccord has no Task nore Orders associated
+        If Account record has no Task nore Orders associated
         For each of theese Accounts create a Task (Subject : Call, Satus : New, Priority : normal, Reminder automatic*/
 public with sharing class TaskCreateHelper_Queueable {
 
@@ -14,11 +14,11 @@ public with sharing class TaskCreateHelper_Queueable {
 
         List<Id> accountIdListWithNoTasksNoOrders = new List<Id>();
 
-        for(Account accountCurent : accountRecordsList){
+        for(Account accountCurrent : accountRecordsList){
             // if list of Orders Linked to Account is empty and list of Tasks linked to Account is empty 
-            if(accountCurent.Orders.size() == 0
-                && accountCurent.Tasks.size() == 0){
-                accountIdListWithNoTasksNoOrders.add(accountCurent.Id);
+            if(accountCurrent.Orders.size() == 0
+                && accountCurrent.Tasks.size() == 0){
+                accountIdListWithNoTasksNoOrders.add(accountCurrent.Id);
             }
         }
 
@@ -42,8 +42,8 @@ public with sharing class TaskCreateHelper_Queueable {
 
     public static List<Task> constructTasksList(List<Id> accountIdList){
         List<Task> taskListToInsert = new List<Task>();
-        for(Id accountIdCurent : accountIdList){
-            taskListToInsert.add(constructOneTask(accountIdCurent));
+        for(Id accountIdCurrent : accountIdList){
+            taskListToInsert.add(constructOneTask(accountIdCurrent));
         }
         return taskListToInsert;
     }
@@ -51,7 +51,7 @@ public with sharing class TaskCreateHelper_Queueable {
     public static void checkTasksPermissions(List<Task> taskListToInsert){
         if (Schema.sObjectType.Account.fields.Name.isCreateable() == false &&
         Schema.sObjectType.Account.fields.Type.isCreateable() == false) {
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert an Account reccord.');
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert an Account record.');
         }else{
             insert taskListToInsert;
         }

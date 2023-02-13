@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 12-02-2023
+ * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
 **/
 public with sharing class Pricebook2DataFactory {
@@ -17,7 +17,7 @@ public with sharing class Pricebook2DataFactory {
             IsActive = true
         ));
         if (Schema.sObjectType.PriceBook2.fields.Name.isCreateable() == false) {
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert an PriceBook2 reccord.');
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert an PriceBook2 record.');
         }else{
             insert pricebook2ToInsertForTest;
         }

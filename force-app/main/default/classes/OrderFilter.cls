@@ -2,18 +2,18 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 12-02-2023
+ * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
 **/
 public with sharing class OrderFilter {
 
     public static List<Order> orderListFilterStatusDraftToActivated(Map<Id, Order> orderMapOld, Map<Id, Order> orderMapNew) {
         Set<Order> orderSetToReturn = new Set<Order>();
-            for(Order orderCurentNew : orderMapNew.values()){
-                Order orderCurentOld = orderMapOld.get(orderCurentNew.Id);
-                if( orderCurentOld.Status == 'Draft'
-                    && orderCurentNew.Status == 'Activated'){
-                        orderSetToReturn.add(orderCurentNew);
+            for(Order orderCurrentNew : orderMapNew.values()){
+                Order orderCurrentOld = orderMapOld.get(orderCurrentNew.Id);
+                if( orderCurrentOld.Status == 'Draft'
+                    && orderCurrentNew.Status == 'Activated'){
+                        orderSetToReturn.add(orderCurrentNew);
                     }
             }
         return new List<Order>(orderSetToReturn);
@@ -28,9 +28,9 @@ public with sharing class OrderFilter {
         List<Order> orderWithOrderItem = OrderGet.getOrderWithOrderItem(orderIdList);
 
         // transforme it into a Set of Order
-        for(Order orderCurent : orderWithOrderItem){
-            if(orderCurent.orderItems.size() == 0){
-                orderListToReturn.add(orderCurent);
+        for(Order orderCurrent : orderWithOrderItem){
+            if(orderCurrent.orderItems.size() == 0){
+                orderListToReturn.add(orderCurrent);
             }
         }
         return orderListToReturn;

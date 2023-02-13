@@ -30,7 +30,7 @@ public with sharing class PricebookEntryDataFactory {
     }
     public static void checkPermissionPricebookEntry(PricebookEntry priceBookEntryToInsert){
         if (!Schema.sObjectType.PricebookEntry.fields.UnitPrice.isCreateable()) {
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert a PricebookEntry reccord.');
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert a PricebookEntry record.');
         }else{
             insert priceBookEntryToInsert;
         }

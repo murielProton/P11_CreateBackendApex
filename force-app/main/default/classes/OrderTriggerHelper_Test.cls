@@ -70,9 +70,9 @@ public with sharing class OrderTriggerHelper_Test {
         List<OrderItem> orderItemsList = new List<OrderItem>();
         PricebookEntry pricebookEntryForThisTest = PricebookEntryGet.getPricebookEntryByPricebook2AndProduct2(pricebook2Standard.Id, product2ForThisTest.Id)[0];
 
-        for(Order orderCurent : orderList){
+        for(Order orderCurrent : orderList){
             //(Order orderForThisTest, Product2 product2ForThisTest, PricebookEntry pricebookEntryForThisTest)
-            orderItemsList.add(OrderItemDataFactory.constructOneOrderItem(orderCurent.Id, product2ForThisTest.Id, pricebookEntryForThisTest.Id));
+            orderItemsList.add(OrderItemDataFactory.constructOneOrderItem(orderCurrent.Id, product2ForThisTest.Id, pricebookEntryForThisTest.Id));
         }
         insert orderItemsList;
         
@@ -100,9 +100,9 @@ public with sharing class OrderTriggerHelper_Test {
         List<Order> orderList = OrderGet.getOrdersAll();
         Map<Id, Order> orderMapOld = new Map<Id, Order>(orderList);
         Map<Id, Order> orderMapNew = new Map<Id, Order>();
-        for (Order orderCurent : orderList){
-            orderCurent.Status = 'Activated';
-            orderMapNew.put(orderCurent.Id, orderCurent);
+        for (Order orderCurrent : orderList){
+            orderCurrent.Status = 'Activated';
+            orderMapNew.put(orderCurrent.Id, orderCurrent);
         }
         
 
@@ -151,14 +151,14 @@ public with sharing class OrderTriggerHelper_Test {
     public static void testUpdateAccountActiveIfOrderDelete(){
         List<Order> orderListForTest = OrderGet.getOrdersAll();
         Set<Id> orderIDSetAll = new Set<Id>();
-        for (Order orderCurent : orderListForTest){
-            orderIDSetAll.add(orderCurent.Id);
+        for (Order orderCurrent : orderListForTest){
+            orderIDSetAll.add(orderCurrent.Id);
         }
         insert new Account(Name = 'AccountName-6');
         List<Account> accountsList = AccountGet.getAccountsAll();
         Set<Id> accountIDSetOfAllDeletedOrders = new Set<Id>();
-        for(Account accountCurent : accountsList){
-            accountIDSetOfAllDeletedOrders.add(accountCurent.Id);
+        for(Account accountCurrent : accountsList){
+            accountIDSetOfAllDeletedOrders.add(accountCurrent.Id);
         }
 
         Test.startTest();

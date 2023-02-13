@@ -30,15 +30,15 @@ public with sharing class TaskCreateHelper_QueueableTest {
         List<Order> orderList = OrderGet.getOrdersAll();
 
         Set<Id> orderIDSetAll = new Set<Id>();
-        for (Order orderCurent : orderList){
-            orderIDSetAll.add(orderCurent.Id);
+        for (Order orderCurrent : orderList){
+            orderIDSetAll.add(orderCurrent.Id);
         }
         TaskDataFactory.createTasksList(accountIdList);
         insert new Account(Name = 'AccountName-6');
         List<Account> accountsList = AccountGet.getAccountsAll();
         Set<Id> accountIDSetOfAllDeletedOrders = new Set<Id>();
-        for(Account accountCurent : accountsList){
-            accountIDSetOfAllDeletedOrders.add(accountCurent.Id);
+        for(Account accountCurrent : accountsList){
+            accountIDSetOfAllDeletedOrders.add(accountCurrent.Id);
         }
     }
 

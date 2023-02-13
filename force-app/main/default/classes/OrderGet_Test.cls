@@ -53,9 +53,9 @@ public with sharing class OrderGet_Test {
         // for each Orders create an OrderItem
         List<OrderItem> orderItemsList = new List<OrderItem>();
         List<PricebookEntry> pricebookEntryListForThisTest = PricebookEntryGet.getPricebookEntryByPricebook2AndProduct2(pricebookListForThisTest[0].Id, product2ListForThisTest[0].Id);
-        for(Order orderCurent : orderList){
+        for(Order orderCurrent : orderList){
             //(Order orderForThisTest, Product2 product2ForThisTest, PricebookEntry pricebookEntryForThisTest)
-            orderItemsList.add(OrderItemDataFactory.constructOneOrderItem(orderCurent.Id, product2ListForThisTest[0].Id, pricebookEntryListForThisTest[0].Id));
+            orderItemsList.add(OrderItemDataFactory.constructOneOrderItem(orderCurrent.Id, product2ListForThisTest[0].Id, pricebookEntryListForThisTest[0].Id));
         }
         insert orderItemsList;
 

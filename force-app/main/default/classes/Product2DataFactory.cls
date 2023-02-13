@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-23-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 13-02-2023
+ * @last modified by  : Muriel Proton
 **/
 public with sharing class Product2DataFactory {
 
@@ -16,7 +16,7 @@ public with sharing class Product2DataFactory {
             IsActive = true
         ));
         if (Schema.sObjectType.Product2.fields.Name.isCreateable() == false) {
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert an Product2 reccord.');
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert an Product2 record.');
         }else{
             insert productsToInsertFortTest;
         }

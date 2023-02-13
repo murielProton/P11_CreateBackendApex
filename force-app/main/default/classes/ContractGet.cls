@@ -32,7 +32,7 @@ public with sharing class ContractGet {
 
     private static void checkPermissionContract(){
         if( !Contract.SObjectType.getDescribe().isAccessible()){
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get a Contract reccord.');
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get a Contract record.');
         }
     }
 }

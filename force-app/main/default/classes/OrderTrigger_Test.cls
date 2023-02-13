@@ -70,9 +70,9 @@ public with sharing class OrderTrigger_Test {
         List<OrderItem> orderItemsList = new List<OrderItem>();
         PricebookEntry pricebookEntryForThisTest = PricebookEntryGet.getPricebookEntryByPricebook2AndProduct2(pricebook2Standard.Id, product2ForThisTest.Id)[0];
 
-        for(Order orderCurent : orderList){
+        for(Order orderCurrent : orderList){
             //(Order orderForThisTest, Product2 product2ForThisTest, PricebookEntry pricebookEntryForThisTest)
-            orderItemsList.add(OrderItemDataFactory.constructOneOrderItem(orderCurent.Id, product2ForThisTest.Id, pricebookEntryForThisTest.Id));
+            orderItemsList.add(OrderItemDataFactory.constructOneOrderItem(orderCurrent.Id, product2ForThisTest.Id, pricebookEntryForThisTest.Id));
         }
         insert orderItemsList;
 
@@ -151,8 +151,8 @@ public with sharing class OrderTrigger_Test {
     }
     @isTest
     public static void testOrderTriggerHandlerAfterDelete(){
+        /*Need a new set of Accont, Contract to create a record on order that is not valid. */
         List<Contract> contractListToCreateOrders = ContractGet.getContractsAll();
-
         PriceBook2 pricebook = Pricebook2Get.getPriceBook2Standard();
         List<Order> orderbeforeInsert = OrderGet.getOrdersAll();
         
@@ -168,6 +168,7 @@ public with sharing class OrderTrigger_Test {
             ContractTerm = 6
         );
         insert contract;
+
         Contract contractDoomed = [SELECT Id
                                     FROM Contract
                                     WHERE AccountId = :accountIdForDeletion

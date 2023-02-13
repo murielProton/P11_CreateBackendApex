@@ -59,7 +59,7 @@ public with sharing class OrderGet {
             || !Schema.SObjectType.Order.fields.Name.isAccessible()
             || !Schema.SObjectType.Order.fields.AccountId.isAccessible()
         ){
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an Order reccord.');
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an Order record.');
         }
     }
 

@@ -34,8 +34,8 @@ public with sharing class AccountGet {
         List<Account> accoutListToReturn = new List<Account>();
         // transform a list of orders into a list of orders id
         Set<Id> accountIDList = new Set<Id>();
-        for (Order orderCurent : orderList){
-            accountIDList.add(orderCurent.accountId);
+        for (Order orderCurrent : orderList){
+            accountIDList.add(orderCurrent.accountId);
         }
         return getAccontsByIds(accountIDList);
     }
@@ -78,9 +78,9 @@ public with sharing class AccountGet {
         List<ID> accountIDListOfAllDeletedOrders = new List<ID>(accountIDSetOfAllDeletedOrders);
         List<Order> orderList = OrderGet.getOrdersAll();
         List<ID> accountIDListOfAllOrders = new List<ID>();
-        for(Order orderCurent : orderList){
-            if(!accountIDListOfAllOrders.contains(orderCurent.AccountId)){
-                accountIDListOfAllOrders.add(orderCurent.AccountId);
+        for(Order orderCurrent : orderList){
+            if(!accountIDListOfAllOrders.contains(orderCurrent.AccountId)){
+                accountIDListOfAllOrders.add(orderCurrent.AccountId);
             }
         }
         checkPermissionAccount();
@@ -98,7 +98,7 @@ public with sharing class AccountGet {
             || !Schema.SObjectType.Account.fields.Name.isAccessible()
             || !Schema.SObjectType.Account.fields.Active__c.isAccessible()
         ){
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an Account reccord.');
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an Account record.');
         }
     }
 }

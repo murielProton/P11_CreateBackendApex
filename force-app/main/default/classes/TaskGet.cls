@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Muriel Proton
  * @group             : 
- * @last modified on  : 12-02-2023
+ * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
 **/
 public with sharing class TaskGet {
@@ -25,7 +25,7 @@ public with sharing class TaskGet {
             !Schema.SObjectType.Task.fields.Priority.isAccessible() &&
             !Schema.SObjectType.Task.fields.IsReminderSet.isAccessible()&&
             !Schema.SObjectType.Task.fields.WhatId.isAccessible()){
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an Order reccord.');
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an Order record.');
         }
     }
 }

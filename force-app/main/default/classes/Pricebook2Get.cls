@@ -45,7 +45,7 @@ public with sharing class Pricebook2Get {
             || !Schema.SObjectType.Pricebook2.fields.Name.isAccessible()
             || !Schema.SObjectType.Pricebook2.fields.isActive.isAccessible()
         ){
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get a Pricebook2 reccord.');
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get a Pricebook2 record.');
         }
     }
 }

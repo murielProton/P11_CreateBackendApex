@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 12-02-2023
+ * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
 **/
 @isTest
@@ -59,13 +59,13 @@ public with sharing class OrderFilter_Test {
         List<Pricebook2> pricebookListForThisTest = Pricebook2Get.getPriceBook2ListByName(pricebook2Name);
         List<Product2> product2ListForThisTest = Product2Get.getProduct2ListByName(productName);
         List<PricebookEntry> pricebookEntryListForThisTest = PricebookEntryGet.getPricebookEntryByPricebook2AndProduct2(pricebookListForThisTest[0].Id, product2ListForThisTest[0].Id);
-        for(Order orderCurent : orderListOld){
+        for(Order orderCurrent : orderListOld){
             //(Order orderForThisTest, Product2 product2ForThisTest, PricebookEntry pricebookEntryForThisTest)
-            orderItemsList.add(OrderItemDataFactory.constructOneOrderItem(orderCurent.Id, product2ListForThisTest[0].Id, pricebookEntryListForThisTest[0].Id));
+            orderItemsList.add(OrderItemDataFactory.constructOneOrderItem(orderCurrent.Id, product2ListForThisTest[0].Id, pricebookEntryListForThisTest[0].Id));
         }
         
         if (Schema.sObjectType.Order.fields.Name.isCreateable() == false) {
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert an OderItem reccord.');
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert an OderItem record.');
         }else{
             insert orderItemsList;
         }

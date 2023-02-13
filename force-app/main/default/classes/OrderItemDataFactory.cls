@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-31-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 13-02-2023
+ * @last modified by  : Muriel Proton
 **/
 public with sharing class OrderItemDataFactory {
 
@@ -20,12 +20,12 @@ public with sharing class OrderItemDataFactory {
 
     public static void createOrderItemsList(List<Order> orderList, Id product2Id, Id pricebookEntryId){
         List<OrderItem> orderItemsList = new List<OrderItem>();
-        for(Order orderCurent : orderList){
+        for(Order orderCurrent : orderList){
             //(Order orderForThisTest, Product2 product2ForThisTest, PricebookEntry pricebookEntryForThisTest)
-            orderItemsList.add(OrderItemDataFactory.constructOneOrderItem(orderCurent.Id, product2Id, pricebookEntryId));
+            orderItemsList.add(OrderItemDataFactory.constructOneOrderItem(orderCurrent.Id, product2Id, pricebookEntryId));
         }        
         if (Schema.sObjectType.OrderItem.fields.OrderId.isCreateable() == false) {
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert an OrderItem reccord.');
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert an OrderItem record.');
         }else{
             insert orderItemsList;
         }

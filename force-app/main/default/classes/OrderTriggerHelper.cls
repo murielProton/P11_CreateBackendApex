@@ -21,11 +21,11 @@ public with sharing class OrderTriggerHelper {
 
     /* Methode has to be used within a condition or with a specified list */
     public static void displayMessageForEachOrderNotValid(List<Order> orderList, Map<Id, Order> orderMapNew){
-        for(Order orderCurent : orderList){
+        for(Order orderCurrent : orderList){
             //We need a map here cause we are using this in trigger !!
             //sObject.addError('bad');
-            Order orderToAddErrorTo = orderMapNew.get(orderCurent.Id);
-            orderToAddErrorTo.addError('Avant de pouvoir passer le statut à /"Activated/" de '+orderCurent.Name+', il doit être associé à un produit (Product2).');
+            Order orderToAddErrorTo = orderMapNew.get(orderCurrent.Id);
+            orderToAddErrorTo.addError('Avant de pouvoir passer le statut à /"Activated/" de '+orderCurrent.Name+', il doit être associé à un produit (Product2).');
         }
     }
     
@@ -43,8 +43,8 @@ public with sharing class OrderTriggerHelper {
         // get the list of Accounts of the deleted Orders
         Set<Account> accountsSetOfDeletedOrders = AccountGet.getAccontsLinkedToOrders(orderList);
         Set<ID> accountIDSetOfAllDeletedOrders = new  Set<ID>();
-        for(Account accountCurent : accountsSetOfDeletedOrders){
-            accountIDSetOfAllDeletedOrders.add(accountCurent.Id);
+        for(Account accountCurrent : accountsSetOfDeletedOrders){
+            accountIDSetOfAllDeletedOrders.add(accountCurrent.Id);
         }
 
          // Get the list of Accounts that have NO Orders Linked to them

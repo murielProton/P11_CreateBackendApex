@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Muriel Proton
  * @group             : 
- * @last modified on  : 12-02-2023
+ * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
 **/
 public with sharing class TaskCreate_Queueable implements Database.Batchable<sObject> {
@@ -27,7 +27,7 @@ public with sharing class TaskCreate_Queueable implements Database.Batchable<sOb
 
     public void execute(Database.BatchableContext bc, List<Account> accountRecordsList){
         /* process each batch of records
-        Loop on this Account list and return accounts that have no reccord Task nore Orders associated*/
+        Loop on this Account list and return accounts that have no record Task nore Orders associated*/
         List<Id> accountsIdListToTest = TaskCreateHelper_Queueable.filterAccountListForNotLinkedToTasksNorOrders(accountRecordsList);
         /*For each of theese Accounts create a Task (Subject : Call, Satus : New, Priority : normal, Reminder automatic*/
         List<Task> tasksRecordsListToInsert = TaskCreateHelper_Queueable.constructTasksList(accountsIdListToTest);

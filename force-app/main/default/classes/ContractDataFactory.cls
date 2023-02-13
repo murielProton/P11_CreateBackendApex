@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-15-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 13-02-2023
+ * @last modified by  : Muriel Proton
 **/
 public with sharing class ContractDataFactory {
 
@@ -26,7 +26,7 @@ public with sharing class ContractDataFactory {
         }
 
         if (Schema.sObjectType.Contract.fields.Status.isCreateable() == false) {
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert a Contract reccord.');
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert a Contract record.');
         }else{
             insert contractsList;
         }

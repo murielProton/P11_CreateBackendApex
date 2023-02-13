@@ -19,8 +19,8 @@ public with sharing class TaskDataFactory {
 
     public static void createTasksList(Set<Id> accountIdList){
         List<Task> taskListToInsert = new List<Task>();
-        for(Id accountIdCurent : accountIdList){
-            taskListToInsert.add(constructOneTask(accountIdCurent));
+        for(Id accountIdCurrent : accountIdList){
+            taskListToInsert.add(constructOneTask(accountIdCurrent));
         }
         checkTasksPermissionsTask(taskListToInsert);
     }
@@ -29,7 +29,7 @@ public with sharing class TaskDataFactory {
         if (!Task.SObjectType.getDescribe().isAccessible() 
             || !Schema.sObjectType.Task.fields.Subject.isCreateable() 
             || !Schema.sObjectType.Task.fields.Status.isCreateable()) {
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert an Task reccord.');
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert an Task record.');
         }else{
             insert taskListToInsert;
         }

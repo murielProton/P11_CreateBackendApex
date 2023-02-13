@@ -31,7 +31,7 @@ public with sharing class Product2Get {
             || !Schema.SObjectType.Product2.fields.Name.isAccessible()
             || !Schema.SObjectType.Product2.fields.isActive.isAccessible()
         ){
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an Product2 reccord.');
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an Product2 record.');
         }
     }
 }

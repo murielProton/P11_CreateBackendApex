@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-31-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 13-02-2023
+ * @last modified by  : Muriel Proton
 **/
 public with sharing class OrderDataFactory {
     // Idée passer les paramettres  dans un array
@@ -27,14 +27,14 @@ public with sharing class OrderDataFactory {
 
         List<Order> ordersListToInsertForTest = new List<Order>();
         
-        for(Contract contractCurent : contractListToCreateOrders){
-            ordersListToInsertForTest.add(constructOneOrder(orderName+contractCurent.Name, 
-                                                            contractCurent.AccountId, 
-                                                            contractCurent.Id , 
+        for(Contract contractCurrent : contractListToCreateOrders){
+            ordersListToInsertForTest.add(constructOneOrder(orderName+contractCurrent.Name, 
+                                                            contractCurrent.AccountId, 
+                                                            contractCurrent.Id , 
                                                             pricebook.Id));
         }
         if (Schema.sObjectType.Order.fields.Name.isCreateable() == false) {
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert an Order reccord.');
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert an Order record.');
         }else{
             insert ordersListToInsertForTest;
         }
