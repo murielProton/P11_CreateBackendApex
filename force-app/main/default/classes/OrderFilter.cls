@@ -23,7 +23,7 @@ public with sharing class OrderFilter {
         //Declare the List to return
         List<Order> orderListToReturn = new List<Order>();
         // transform a list of orders into a list of orders id
-        List<Id> orderIdList = new List<Id>(new Map<Id, SObject> (orderList).keySet());
+        List<Id> orderIdList = new List<Id>(new Map<Id, Order> (orderList).keySet());
         // return a List of OrderItems when the OrderItem is linked to a Product2 and an Order
         List<Order> orderWithOrderItem = OrderGet.getOrderWithOrderItem(orderIdList);
 

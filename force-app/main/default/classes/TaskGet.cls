@@ -19,12 +19,12 @@ public with sharing class TaskGet {
     }
 
     public static void checkTaskPermissions(){
-        if(!Task.SObjectType.getDescribe().isAccessible() &&
-            !Schema.SObjectType.Task.fields.Subject.isAccessible() &&
-            !Schema.SObjectType.Task.fields.Status.isAccessible() &&
-            !Schema.SObjectType.Task.fields.Priority.isAccessible() &&
-            !Schema.SObjectType.Task.fields.IsReminderSet.isAccessible()&&
-            !Schema.SObjectType.Task.fields.WhatId.isAccessible()){
+        if(!Task.SObjectType.getDescribe().isAccessible() 
+            || !Schema.SObjectType.Task.fields.Subject.isAccessible() 
+            || !Schema.SObjectType.Task.fields.Status.isAccessible() 
+            || !Schema.SObjectType.Task.fields.Priority.isAccessible() 
+            || !Schema.SObjectType.Task.fields.IsReminderSet.isAccessible()
+            || !Schema.SObjectType.Task.fields.WhatId.isAccessible()){
             throw new CRUDPermissionBeforSOQLDMLException('You have no permission to get an Order record.');
         }
     }

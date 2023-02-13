@@ -98,42 +98,28 @@ public with sharing class OrderTriggerHelper_Test {
         }
         insert listOfOrdersToInsert;
         List<Order> orderList = OrderGet.getOrdersAll();
-        Map<Id, Order> orderMapOld = new Map<Id, Order>(orderList);
-        Map<Id, Order> orderMapNew = new Map<Id, Order>();
         for (Order orderCurrent : orderList){
             orderCurrent.Status = 'Activated';
-            orderMapNew.put(orderCurrent.Id, orderCurrent);
         }
-        
-
+         
+        Boolean checkIfIWasInCatch = false;
         Test.startTest();
         try{
-            OrderTriggerHelper.sendErrorOnOrder(orderMapOld, orderMapNew);
+            update orderList;
         }catch(DMLException e){
             System.assert(e != null && e.getMessage().contains('Avant de pouvoir passer le statut à /"Activated/" de '), 
                 'An exception message should have been triggered.');
+            checkIfIWasInCatch = true;
         }
         Test.stopTest();
+
+        System.assertEquals(true, checkIfIWasInCatch, 'this test should run through catch!');
     }
 
-   /*@isTest
+   @isTest
     public static void testDisplayMessageForEachOrderNotValid(){
-        // TODO Find out what is ailing this, with Thomas
-        List<Order> orderList = OrderGet.getOrdersAll();
-        Map<Id, Order> orderMapNew = new Map<Id, Order>(orderList);
-        System.debug('order list '+orderList);
-        System.debug('orderMap New '+orderMapNew);
-
-      
-        Test.startTest();
-        try{
-            OrderTriggerHelper.displayMessageForEachOrderNotValid(orderList, orderMapNew);
-        }catch(DMLException e){
-            System.assert(e != null && e.getMessage().contains('Avant de pouvoir passer le statut à /"Activated/" de '), 
-                'Method displayMessageForEachOrderNotValid, An exception message should have been triggered.');
-        }
-        Test.stopTest();
-    }*/
+        // already tested above
+    }
 
     @isTest
     public static void testUpdateAccountActiveIfLinkedToOrder(){
