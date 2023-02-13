@@ -1,12 +1,17 @@
 /**
  * @description       : 
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @author            : Muriel Proton
  * @group             : 
- * @last modified on  : 01-23-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 13-02-2023
+ * @last modified by  : Muriel Proton
 **/
 
 public with sharing class ContractUpdate {
+    /**
+    * @description Update Method to change field Status to Activated on Contract List records passed as parametter
+    * @author Muriel Proton | 13-02-2023 
+    * @param List<Contract> 
+    **/
     public static void updateContractsStatusToActivated(List<Contract> contractsList) {
         List<Contract> contractsListToUpdate = new List<Contract>();
         for(Contract contractCurrent : contractsList){

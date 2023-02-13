@@ -1,12 +1,16 @@
 /**
  * @description       : 
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @author            : Muriel Proton
  * @group             : 
- * @last modified on  : 01-23-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 13-02-2023
+ * @last modified by  : Muriel Proton
 **/
 @isTest
 public with sharing class Product2DataFactory_Test {
+    /**
+    * @description Test method for Product2DataFactory.createProduct2()
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     static void testCreateProduct2(){
 

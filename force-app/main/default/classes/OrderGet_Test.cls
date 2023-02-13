@@ -1,6 +1,6 @@
 /**
  * @description       : 
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @author            : Muriel Proton
  * @group             : 
  * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
@@ -14,6 +14,10 @@ public with sharing class OrderGet_Test {
     private static String pricebook2Name = 'France Price Book';
 
 
+    /**
+    * @description TestSetup for OrderGet_Test
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @TestSetup
     static void setupOrderGet(){
         //Create an Account
@@ -61,6 +65,10 @@ public with sharing class OrderGet_Test {
 
     }
 
+    /**
+    * @description Test method for OrderGet.getOrdersAll()
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     static void testGetOrdersAll(){
 
@@ -71,6 +79,10 @@ public with sharing class OrderGet_Test {
         System.assertEquals(10, orderListForThisTest.size(), 'OrderGet.getOrdersAll should return at least one order.');
     }
 
+    /**
+    * @description Test method for OrderGet.getOrdersWhereStatusActivated()
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     static void testGetOrdersWhereStatusActivated(){
 
@@ -84,6 +96,10 @@ public with sharing class OrderGet_Test {
         System.assertEquals(10, orderListForThisTest.size(), 'OrderGet.getOrdersWhereStatusActivated should return at least one order.');
     }
 
+    /**
+    * @description Test method for OrderGet.getOrderWithOrderItem(orderIdList)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     static void testGetOrderWithOrderItem(){
         List<Order> orderList = OrderGet.getOrdersAll();
@@ -97,6 +113,10 @@ public with sharing class OrderGet_Test {
         System.assertEquals(orderIdList.size(), orderListForThisTest.size(), 'OrderGet.getOrderWithOrderItem should return the same number of records as all Orders inserted have OrderItems.');
     }
 
+    /**
+    * @description Test method for OrderGet.getOrderByAccountAndContract(accountId, contractId)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     static void testGetOrderByAccountAndContract(){
 

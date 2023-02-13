@@ -1,6 +1,6 @@
 /**
  * @description       : 
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @author            : Muriel Proton
  * @group             : 
  * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
@@ -8,12 +8,20 @@
 @isTest
 public with sharing class PricebookEntryDataFactory_Test {
 
+    /**
+    * @description TestSetup for PricebookEntryDataFactory_Test
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @TestSetup
     static void setupPricebookEntryDataFactory() {
         Pricebook2DataFactory.createPricebook2();
         Product2DataFactory.createProduct2();
     }
 
+    /**
+    * @description Test method for PricebookEntryDataFactory.createPriceBookEntryForPricebookStandard(product2ForThisTest)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     static void testCreatePriceBookEntryForPricebookStandard(){
         //gest sObjects for the Test
@@ -38,6 +46,10 @@ public with sharing class PricebookEntryDataFactory_Test {
         System.assertEquals(pricebookEntryForThisTest.Pricebook2Id, Test.getStandardPricebookId(), 'PricebookEntryDataFactory.createPriceBookEntryForPricebookStandard should insert a Standard PricebookEntry.');
     }
 
+    /**
+    * @description Test method for PricebookEntryDataFactory.createPriceBookEntry(pricebookForThisTest, product2ForThisTest)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     static void testCreatePricebookEntry(){
         //gest sObjects for the Test

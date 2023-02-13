@@ -1,6 +1,6 @@
 /**
  * @description       : 
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @author            : Muriel Proton
  * @group             : 
  * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
@@ -11,6 +11,10 @@ public with sharing class OrderUpdate_Test {
     private static String pricebook2Name = 'France Price Book';
     private static String productName = 'WIFI';
 
+    /**
+    * @description TestSetup for OrderUpdate_Test
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @TestSetup
     static void setupOrderUpdate(){
         //Create an Account
@@ -57,6 +61,10 @@ public with sharing class OrderUpdate_Test {
         insert orderItemsList;
     }
 
+    /**
+    * @description Test method for OrderUpdate.updateOrdersStatusToActivated(orderListForUpdate)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     static void testUpdateOrdersStatusToActivated(){
         

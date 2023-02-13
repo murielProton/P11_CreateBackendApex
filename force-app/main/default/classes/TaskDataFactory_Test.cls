@@ -2,13 +2,17 @@
  * @description       : 
  * @author            : Muriel Proton
  * @group             : 
- * @last modified on  : 09-02-2023
+ * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
 **/
 @isTest
 public with sharing class TaskDataFactory_Test {
     private static String accountName = 'accountName-0';
 
+    /**
+    * @description TestSetup for TaskDataFactory_Test
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @TestSetup
     static void setupTaskDataFactory(){
         //Create an Account
@@ -16,6 +20,10 @@ public with sharing class TaskDataFactory_Test {
         List<Account> accountsList = AccountGet.getAccountsAll();
     }
 
+    /**
+    * @description Test method for TaskDataFactory.constructOneTask(accountId)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     public static void taskConstructOneTask(){
 
@@ -27,6 +35,10 @@ public with sharing class TaskDataFactory_Test {
 
         System.assertEquals(accountId, taskToTest.WhatId, 'TaskDataFactory.constructTask should construct one Task.');
     }
+    /**
+    * @description Test method for TaskDataFactory.createTasksList(accountIdSet)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     public static void testCreateTasksList(){
         List<Account> accountSet = AccountGet.getAccountsAll();

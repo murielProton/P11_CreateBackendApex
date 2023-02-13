@@ -1,6 +1,6 @@
 /**
  * @description       : 
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @author            : Muriel Proton
  * @group             : 
  * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
@@ -8,6 +8,13 @@
 public with sharing class PricebookEntryGet {
     // Product must be active and added to Pricebook first
 
+    /**
+    * @description Get method for all records on PricebookEntry, that are connected to the Id of Pricebook2 and to the Id ofProduct2, passed as parametters
+    * @author Muriel Proton | 13-02-2023 
+    * @param Id 
+    * @param Id 
+    * @return List<PricebookEntry> 
+    **/
     public static List<PricebookEntry> getPricebookEntryByPricebook2AndProduct2(Id pricebookIdForThisTest, Id product2IdForThisTest){
         List<PricebookEntry> pricebookEntryListToReturn = new List<PricebookEntry>();
         if(PricebookEntry.SObjectType.getDescribe().isAccessible() &&

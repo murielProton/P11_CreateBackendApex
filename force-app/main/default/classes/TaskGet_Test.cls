@@ -2,12 +2,16 @@
  * @description       : 
  * @author            : Muriel Proton
  * @group             : 
- * @last modified on  : 09-02-2023
+ * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
 **/
 @isTest
 public with sharing class TaskGet_Test {
 
+    /**
+    * @description TestSetup for TaskGet_Test
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @TestSetup
     public static void setupTaskGet(){
         //Create an Account
@@ -17,6 +21,10 @@ public with sharing class TaskGet_Test {
         TaskDataFactory.createTasksList(accountIdSet);
     }
 
+    /**
+    * @description Test for TaskGet.getTaskAll()
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     public static void testGetTaskAll() {
 

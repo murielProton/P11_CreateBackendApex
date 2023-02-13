@@ -1,12 +1,16 @@
 /**
  * @description       : 
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @author            : Muriel Proton
  * @group             : 
- * @last modified on  : 01-16-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 13-02-2023
+ * @last modified by  : Muriel Proton
 **/
 @isTest
 public with sharing class Pricebook2DataFactory_Test {
+    /**
+    * @description Test method for Pricebook2DataFactory.createPricebook2()
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     static void testCreatePricebook2(){
         Test.startTest();

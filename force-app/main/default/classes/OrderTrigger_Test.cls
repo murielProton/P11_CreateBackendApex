@@ -12,6 +12,10 @@ public with sharing class OrderTrigger_Test {
     private static String productName = 'WIFI';
     private static String orderName = 'Telepathy-';
 
+    /**
+    * @description TestSetup for OrderTrigger_Test
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @TestSetup
     static void setupOrderTrigger() {
         // Create a bunch of Accounts
@@ -78,6 +82,10 @@ public with sharing class OrderTrigger_Test {
 
     }
 
+    /**
+    * @description Test method to trigger OrderTrigger.trigger when updating unvalid Order records
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     public static void testOrderTriggerUpdateNOTValid(){
         List<Order> orderList = OrderGet.getOrdersAll();
@@ -101,6 +109,10 @@ public with sharing class OrderTrigger_Test {
         System.assertEquals(true, exectionOK, 'An execptions should have been thorwn.');
     }
 
+    /**
+    * @description Test method to trigger OrderTrigger.trigger when updating valid Order records
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     public static void testOrderTriggerUpdateValid(){
         List<Order> orderListToUpdate = OrderGet.getOrdersAll();
@@ -120,6 +132,10 @@ public with sharing class OrderTrigger_Test {
         System.assertEquals('Activated', orderListForTest[0].Status, 'The Status of the Order record should be Activated.');
     }
 
+    /**
+    * @description Test method to trigger OrderTrigger.trigger to check if the field Active__c on Account records is set to tue 
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     public static void testOrderTriggerHandlerAfterInsert(){
         List<Contract> contractListToCreateOrders = ContractGet.getContractsAll();
@@ -149,6 +165,10 @@ public with sharing class OrderTrigger_Test {
 
         System.assertEquals(1, accountList.size(), 'After inserting records on Order, Account field Active__c should be updated.');
     }
+    /**
+    * @description Test method to trigger OrderTrigger.trigger to check if the field Active__c on Account is set to false when the record Account has no Orders linked to it
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     public static void testOrderTriggerHandlerAfterDelete(){
         /*Need a new set of Accont, Contract to create a record on order that is not valid. */

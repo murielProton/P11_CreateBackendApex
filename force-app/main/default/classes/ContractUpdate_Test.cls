@@ -1,15 +1,19 @@
 /**
  * @description       : 
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @author            : Muriel Proton
  * @group             : 
- * @last modified on  : 01-23-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 13-02-2023
+ * @last modified by  : Muriel Proton
 **/
 @isTest
 public with sharing class ContractUpdate_Test {
     
     String accountName = 'AccountName-0';
     
+    /**
+    * @description TestSetup for ContractUpdate_Test
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @TestSetup
     static void setupContractUpdate(){
         //Create an Account
@@ -19,6 +23,10 @@ public with sharing class ContractUpdate_Test {
         ContractDataFactory.createContractsList(accountsListForThisTest);
     }
 
+    /**
+    * @description Test method for ContractUpdate.updateContractsStatusToActivated(contractsList)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     static void testUpdateContractsListStatusToActivated(){
         // Get variables for the test

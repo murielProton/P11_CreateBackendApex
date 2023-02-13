@@ -1,8 +1,8 @@
 /**
  * @description       : 
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @author            : Muriel Proton
  * @group             : 
- * @last modified on  : 07-02-2023
+ * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
 **/
 @isTest
@@ -14,6 +14,10 @@ public with sharing class OrderItemDataFactory_Test {
     private static String pricebook2Name = 'France Price Book';
     private static String orderName = 'Telepathy-';
 
+    /**
+    * @description TestSetup for OrderItemDataFactory_Test
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @TestSetup
     static void setupOrderItemDataFactory(){
         //Create an Account
@@ -40,6 +44,10 @@ public with sharing class OrderItemDataFactory_Test {
         OrderDataFactory.createOrdersListForEachContract(contractListToCreateOrders, pricebookForThisTest);
 
     }
+    /**
+    * @description Test method for OrderItemDataFactory.constructOneOrderItem(orderId, product2ForThisTest.Id, pricebookEntryListForThisTest[0].Id)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     static void testConstructOneOrderItem(){
         // get sObjects to run the test
@@ -58,6 +66,10 @@ public with sharing class OrderItemDataFactory_Test {
 
         System.assertEquals(240, orderItemToTest.UnitPrice, 'OrderItemDataFactory.constructOneOrderItem should return one OrderItem.');
     }
+    /**
+    * @description Test method for PricebookEntryGet.getPricebookEntryByPricebook2AndProduct2(pricebookForThisTest.Id, product2ForThisTest.Id)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     static void testCreateOrderItemsList(){
         // get sObjects to run the test

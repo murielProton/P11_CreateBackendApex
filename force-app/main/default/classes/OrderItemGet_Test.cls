@@ -1,8 +1,8 @@
 /**
  * @description       : 
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @author            : Muriel Proton
  * @group             : 
- * @last modified on  : 12-02-2023
+ * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
 **/
 @isTest
@@ -13,6 +13,10 @@ public with sharing class OrderItemGet_Test {
     private static String pricebook2Name = 'France Price Book';
     private static String orderName = 'Telepathy-';
 
+    /**
+    * @description TestSetup for OrderGet_Test
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @TestSetup
     static void setupOrderItemGet(){
         //Create an Account
@@ -44,6 +48,20 @@ public with sharing class OrderItemGet_Test {
         //Create OrderItem
         OrderItem orderItemsListToInstert = OrderItemDataFactory.constructOneOrderItem(orderForThisTest.Id, product2ForThisTest.Id, pricebookEntryForThisTest.Id);
         insert orderItemsListToInstert;
+    }
+
+    /**
+    * @description Test method for OrderItemGet.getOrderItemListAll()
+    * @author Muriel Proton | 13-02-2023 
+    **/
+    @isTest
+    static void testGetOrdersAll(){
+
+        Test.startTest();
+        List<OrderItem> orderItemListForThisTest = OrderItemGet.getOrderItemListAll();
+        Test.stopTest();
+
+        System.assertEquals(1, orderItemListForThisTest.size(), 'OrderGet.getOrdersAll should return at least one order.');
     }
 
 }

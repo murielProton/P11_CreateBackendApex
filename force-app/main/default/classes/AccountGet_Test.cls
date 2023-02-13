@@ -1,6 +1,6 @@
 /**
  * @description       : 
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @author            : Muriel Proton
  * @group             : 
  * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
@@ -10,11 +10,19 @@ public with sharing class AccountGet_Test {
 
     private static String accountName = 'AccountName-';
 
+    /**
+    * @description TestSetup for AccountGet_Test
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @TestSetup
     static void setupAccountGet(){
         AccountDataFactory.createAccountsList(5);
     }
 
+    /**
+    * @description Test method for AccountGet.getAccountByName(accountName+3)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     public static void testGetAccountByName(){
                 
@@ -25,6 +33,10 @@ public with sharing class AccountGet_Test {
         System.assertEquals(accountName+3, accountToTest.name, 'getAccountByName(accountName) from AccountGet should return only one Account record by the name of :'+accountName+3+'.');
     }
 
+    /**
+    * @description Test method for AccountGet.getAccountsAll()
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     public static void testGetAccountsAll(){
         
@@ -35,6 +47,10 @@ public with sharing class AccountGet_Test {
         System.assertEquals( 5, accountsListToTest.size(),'AccountGet.getAccountsAll() should return a list of five records.');
     }
 
+    /**
+    * @description Test method for AccountGet.getAccontsLinkedToOrders(orderList)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     public static void testGetAccontsLinkedToOrders(){
         List<Account> accountList = AccountGet.getAccountsAll();
@@ -59,6 +75,10 @@ public with sharing class AccountGet_Test {
         System.assertEquals( 5, accountsListToTest.size(),'AccountGet.getAccontsLinkedToOrders() should return a list of five records.');
     }
 
+    /**
+    * @description Test method for AccountGet.getAccontsByIds(accountIDSet)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     public static void testGetAccontsByIds(){
         List<Account> accountList = AccountGet.getAccountsAll();
@@ -72,6 +92,10 @@ public with sharing class AccountGet_Test {
     }
 
 
+    /**
+    * @description Test method for AccountGet.getAccountActiveTrue()
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     public static void testGetAccountActiveTrue(){
         List<Account> accountList = AccountGet.getAccountsAll();
@@ -84,6 +108,10 @@ public with sharing class AccountGet_Test {
         System.assertEquals( accountList.size(), accountsListToTest.size(),'AccountGet.getAccountActiveTrue() should return a list of five records.');
     }
 
+    /**
+    * @description Test method for AccountGet.getAccountActiveFalse()
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     public static void testGetAccountActiveFalse(){
         List<Account> accountList = AccountGet.getAccountsAll();
@@ -96,6 +124,10 @@ public with sharing class AccountGet_Test {
         System.assertEquals( accountList.size(), accountsListToTest.size(),'AccountGet.getAccountActiveFalse() should return a list of five records.');
     }
     
+    /**
+    * @description Test method for AccountGet.getAccontsNOTLinkedToOrders(accountIDSetOfAllDeletedOrders)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     public static void testGetAccountNotLinkedToOrders(){
         List<Account> accountList = AccountGet.getAccountsAll();

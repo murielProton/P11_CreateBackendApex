@@ -1,6 +1,6 @@
 /**
  * @description       : 
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @author            : Muriel Proton
  * @group             : 
  * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
@@ -8,6 +8,11 @@
 **/
 public with sharing class OrderItemGet {
 
+    /**
+    * @description Get method OrderItem all records 
+    * @author Muriel Proton | 13-02-2023 
+    * @return List<OrderItem> 
+    **/
     public static List<OrderItem> getOrderItemListAll(){
 
         List<OrderItem> orderItemList = new List<OrderItem>();

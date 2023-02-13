@@ -1,9 +1,9 @@
 /**
  * @description       : 
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @author            : Muriel Proton
  * @group             : 
- * @last modified on  : 01-23-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 13-02-2023
+ * @last modified by  : Muriel Proton
 **/
 
 @isTest
@@ -11,11 +11,19 @@ public with sharing class Pricebook2Get_Test {
 
     private static String pricebook2Name = 'France Price Book';
 
+    /**
+    * @description TestSetup for Pricebook2Get_Test
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @TestSetup
     static void setupPricebook2Get(){
         Pricebook2DataFactory.createPricebook2();
     }
 
+    /**
+    * @description Test method for Pricebook2Get.getPriceBook2ListByName(pricebook2Name)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     static void testGetPriceBook2ByName(){
 

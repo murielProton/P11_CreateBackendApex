@@ -1,6 +1,6 @@
 /**
  * @description       : 
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @author            : Muriel Proton
  * @group             : 
  * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
@@ -12,6 +12,10 @@ public with sharing class OrderTriggerHelper_Test {
     private static String productName = 'WIFI';
     private static String orderName = 'Telepathy-';
 
+    /**
+    * @description TestSetup for OrderTriggerHelper_Test
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @TestSetup
     static void setupOrderTriggerHelper(){
         // Create a bunch of Accounts
@@ -79,6 +83,10 @@ public with sharing class OrderTriggerHelper_Test {
 
     }
 
+    /**
+    * @description Test method for sendErrorOnOrder(orderMapOld, orderMapNew)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     public static void testSendErrorOnOrder(){
 
@@ -116,11 +124,19 @@ public with sharing class OrderTriggerHelper_Test {
         System.assertEquals(true, checkIfIWasInCatch, 'this test should run through catch!');
     }
 
+    /**
+    * @description Test method for displayMessageForEachOrderNotValid(orderList,  orderMapNew) doese not exist beacause it is alredy tested with an other test method
+    * @author Muriel Proton | 13-02-2023 
+    **/
    @isTest
     public static void testDisplayMessageForEachOrderNotValid(){
         // already tested above
     }
 
+    /**
+    * @description Test method for OrderTriggerHelper.updateAccountActiveIfLinkedToOrder(orderListForTest)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     public static void testUpdateAccountActiveIfLinkedToOrder(){
         List<Order> orderListForTest = OrderGet.getOrdersAll();
@@ -133,6 +149,10 @@ public with sharing class OrderTriggerHelper_Test {
         
         System.assertEquals(1, accountListToTest.size(), 'AccountUpdate.updateAccountActiveIfLinkedToOrder(List<Order>) should update Accounts fields Active__c.');
     }
+    /**
+    * @description Test method for OrderTriggerHelper.updateAccountActiveIfOrderDelete(orderListForTest)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     public static void testUpdateAccountActiveIfOrderDelete(){
         List<Order> orderListForTest = OrderGet.getOrdersAll();

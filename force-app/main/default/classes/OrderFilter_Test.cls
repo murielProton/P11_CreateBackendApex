@@ -1,6 +1,6 @@
 /**
  * @description       : 
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @author            : Muriel Proton
  * @group             : 
  * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
@@ -12,6 +12,10 @@ public with sharing class OrderFilter_Test {
     private static String pricebook2Name = 'France Price Book';
     private static String productName = 'WIFI';
 
+    /**
+    * @description TestSetup for OrderFilter_Test
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @TestSetup
     static void setupOrderFilter(){
         //Create an Account
@@ -46,6 +50,10 @@ public with sharing class OrderFilter_Test {
         OrderDataFactory.createOrdersListForEachContract(contractsListForTest, pricebookListForThisTest[0]);  
     }
 
+    /**
+    * @description Test method for OrderFilter.orderListFilterStatusDraftToActivated(orderMapOld, orderMapNew)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     static void testOrderListFilterStatusDraftToActivated(){
         // get a list of Orders records
@@ -90,6 +98,10 @@ public with sharing class OrderFilter_Test {
         System.assertEquals('Activated', orderListToTest[0].Status, 'OrderFilter.orderListFilterStatusDraftToActivated should return a List where all Status are set to Activated.');
     }
 
+    /**
+    * @description Test method for List<Order> orderListToTest = OrderFilter.orderListFilterNOTLinkedToProduct2(orderList)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     static void testOrderListFilterNOTLinkedToProduct2() {
         // get a list of Orders records

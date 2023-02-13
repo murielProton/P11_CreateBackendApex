@@ -1,9 +1,9 @@
 /**
  * @description       : 
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @author            : Muriel Proton
  * @group             : 
- * @last modified on  : 01-30-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 13-02-2023
+ * @last modified by  : Muriel Proton
 **/
 @isTest
 public with sharing class OrderDataFactory_Test {
@@ -12,6 +12,10 @@ public with sharing class OrderDataFactory_Test {
     private static String pricebook2Name = 'France Price Book';
     public static String orderName = 'Telepathy-';
 
+    /**
+    * @description TestSetup for OrderDataFactory_Test
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @TestSetup
     static void setupOrderDataFactory(){
         //Create a List of Accounts
@@ -23,6 +27,10 @@ public with sharing class OrderDataFactory_Test {
         Pricebook2DataFactory.createPricebook2();  
     }
 
+    /**
+    * @description Test method for OrderDataFactory.constructOneOrder(orderName, accountForThisTest.ID, contractForThisTest.ID, pricebookForThisTest.Id)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     static void testConstructOneOrder(){
         // get sObjects for Test
@@ -39,6 +47,10 @@ public with sharing class OrderDataFactory_Test {
         System.assertEquals( 'Draft', orderForThisTest.Status, 'OrderDataFactory.constructOneOrder should create one order.');
     }
 
+    /**
+    * @description Test method for OrderDataFactory.createOrdersListForEachContract(contractListToCreateOrders, pricebookForThisTest)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     static void testCreateOrdersListForEachContract(){
         

@@ -1,12 +1,18 @@
 /**
  * @description       : 
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @author            : Muriel Proton
  * @group             : 
  * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
 **/
 public with sharing class OrderTriggerHelper {
 
+    /**
+    * @description 
+    * @author Muriel Proton | 13-02-2023 
+    * @param Map<Id,Order> 
+    * @param Map<Id,Order> 
+    **/
     public static void sendErrorOnOrder(Map<Id, Order> orderMapOld, Map<Id, Order> orderMapNew){
         // If the field Status value changes from Draft to Activated
         List<Order> orderListStatusChanged = OrderFilter.orderListFilterStatusDraftToActivated(orderMapOld, orderMapNew);
@@ -19,7 +25,13 @@ public with sharing class OrderTriggerHelper {
         displayMessageForEachOrderNotValid(oderListUnupdatable, orderMapNew);
     }
 
-    /* Methode has to be used within a condition or with a specified list */
+    
+    /**
+    * @description Methode has to be used within a condition or with a specified list, displays a message for each record on Order that is not valid
+    * @author Muriel Proton | 13-02-2023 
+    * @param List<Order> 
+    * @param Map<Id,Order>  
+    **/
     public static void displayMessageForEachOrderNotValid(List<Order> orderList, Map<Id, Order> orderMapNew){
         for(Order orderCurrent : orderList){
             //We need a map here cause we are using this in trigger !!
@@ -38,7 +50,12 @@ public with sharing class OrderTriggerHelper {
         AccountUpdate.updateAccountFieldActiveToTrue(accountListToUpdate);
     }
 
-    //USE in Trigger After DELETE
+    
+    /**
+    * @description USE in Trigger After DELETE, Update method for Account records whith no Orders linked 
+    * @author Muriel Proton | 13-02-2023 
+    * @param List<Order> 
+    **/
     public static void updateAccountActiveIfOrderDelete(List<Order> orderList){
         // get the list of Accounts of the deleted Orders
         Set<Account> accountsSetOfDeletedOrders = AccountGet.getAccontsLinkedToOrders(orderList);

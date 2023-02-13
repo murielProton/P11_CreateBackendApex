@@ -1,9 +1,9 @@
 /**
  * @description       : 
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @author            : Muriel Proton
  * @group             : 
- * @last modified on  : 01-30-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 13-02-2023
+ * @last modified by  : Muriel Proton
 **/
 @isTest
 public with sharing class PricebookEntryGet_Test {
@@ -12,6 +12,10 @@ public with sharing class PricebookEntryGet_Test {
     private static String pricebook2Name = 'France Price Book';
     private static String product2Name = 'WIFI';
 
+    /**
+    * @description TestSetup PricebookEntryGet_Test 
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @TestSetup
     static void setupPricebookEntryGet(){
         //Create an Account
@@ -29,6 +33,10 @@ public with sharing class PricebookEntryGet_Test {
         List<Product2> product2ForThisTest = Product2Get.getProduct2ListByName(product2Name);        
     }
 
+    /**
+    * @description Test method for PricebookEntryGet.getPricebookEntryByPricebook2AndProduct2(pricebookForThisTest.Id, product2ForThisTest.Id)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     static void testGetPricebookEntryByPricebook2AndProduct2(){
         //gest sObjects for the Test

@@ -1,6 +1,6 @@
 /**
  * @description       : 
- * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @author            : Muriel Proton
  * @group             : 
  * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
@@ -9,7 +9,12 @@ public with sharing class Pricebook2DataFactory {
 
     private static String pricebook2Name = 'France Price Book';
 
-    //If you create a Pricebook it must be active and standard, but the field Standard is not wrightable.
+    
+    /**
+    * @description insert Pricebook2 one record 
+    * @author Muriel Proton | 13-02-2023 
+    * Warning : If you create a Pricebook it must be active and standard, but the field Standard is not wrightable.
+    **/
     public static void createPricebook2(){
         List<PriceBook2> pricebook2ToInsertForTest = new List<PriceBook2>();
         pricebook2ToInsertForTest.add( new PriceBook2 (

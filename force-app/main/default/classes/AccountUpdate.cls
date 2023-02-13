@@ -6,6 +6,11 @@
  * @last modified by  : Muriel Proton
 **/
 public with sharing class AccountUpdate {
+    /**
+    * @description Update methode to change the field Active__c on Account to true
+    * @author Muriel Proton | 13-02-2023 
+    * @param List<Account> 
+    **/
     public static void updateAccountFieldActiveToTrue(List<Account> accountList) {
         List<Account> accountListToUpdate = new List<Account>();
 
@@ -19,6 +24,11 @@ public with sharing class AccountUpdate {
         checkPermissionAndUpdateAccount(accountListToUpdate);        
     }
 
+    /**
+    * @description Update methode to change the field Active__c on Account to false
+    * @author Muriel Proton | 13-02-2023 
+    * @param List<Account> 
+    **/
     public static void updateAccountFieldActiveToFalse(List<Account> accountList) {
         List<Account> accountListToUpdate = new List<Account>();
 
@@ -32,6 +42,11 @@ public with sharing class AccountUpdate {
         checkPermissionAndUpdateAccount(accountListToUpdate);
     }
 
+    /**
+    * @description Validate CRUD permission before SOQL/DML operation (rule: Security-ApexCRUDViolation) Apex PMD
+    * @author Muriel Proton | 13-02-2023 
+    * @param List<Account>
+    **/
     public static void checkPermissionAndUpdateAccount(List<Account> accountListToUpdate){
         if (Schema.sObjectType.Account.fields.Active__c.isUpdateable() == false) {
             throw new CRUDPermissionBeforSOQLDMLException('You have no permission to update the field Active__c on Account records.');

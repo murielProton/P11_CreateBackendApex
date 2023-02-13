@@ -11,6 +11,10 @@ public with sharing class TaskCreateHelper_QueueableTest {
     //private static String accountName = 'AccountName-0';
     private static String orderName = 'Telepathy';
 
+    /**
+    * @description TestSetup for TaskCreateHelper_QueueableTest
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @TestSetup
     static void setupTaskCreateHelper_Queueable(){
         List<Account> accountList = AccountGet.getAccountsAll();
@@ -42,6 +46,10 @@ public with sharing class TaskCreateHelper_QueueableTest {
         }
     }
 
+    /**
+    * @description Test method for TaskCreateHelper_Queueable.filterAccountListForNotLinkedToTasksNorOrders(accountRecordsList)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     public static void testFilterAccountListForNotLinkedToTasksNorOrders(){
 
@@ -54,6 +62,10 @@ public with sharing class TaskCreateHelper_QueueableTest {
         System.assertEquals( 1, accountsIdListToTest.size(),'TaskCreateHelper_Queueable.filterAccountListForNotLinkedToTasksNorOrders(<Account>) should return 1 Account.');
     }
     
+    /**
+    * @description Test method for TaskCreateHelper_Queueable.constructOneTask(accountId)
+    * @author Muriel Proton | 13-02-2023 
+    **/
     @isTest
     public static void testConstructOneTask(){
 
