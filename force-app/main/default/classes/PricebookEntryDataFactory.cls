@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 06-02-2023
+ * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
 **/
 public with sharing class PricebookEntryDataFactory {
@@ -15,11 +15,7 @@ public with sharing class PricebookEntryDataFactory {
             IsActive = true,
             UseStandardPrice = false
         );
-        if (Schema.sObjectType.PricebookEntry.fields.IsActive.isCreateable() == false) {
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert a PricebookEntry reccord.');
-        }else{
-            insert priceBookEntryToInsert;
-        }
+        checkPermissionPricebookEntry(priceBookEntryToInsert);
     }
     
     public static void createPriceBookEntry(PriceBook2 pricebookForThisTest, Product2 product2ForThisTest){
@@ -30,6 +26,13 @@ public with sharing class PricebookEntryDataFactory {
             IsActive = true,
             UseStandardPrice = false
         );
-        insert priceBookEntryToInsert;
+        checkPermissionPricebookEntry(priceBookEntryToInsert);
+    }
+    public static void checkPermissionPricebookEntry(PricebookEntry priceBookEntryToInsert){
+        if (!Schema.sObjectType.PricebookEntry.fields.UnitPrice.isCreateable()) {
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert a PricebookEntry reccord.');
+        }else{
+            insert priceBookEntryToInsert;
+        }
     }
 }

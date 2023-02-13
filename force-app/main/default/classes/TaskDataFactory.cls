@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Muriel Proton
  * @group             : 
- * @last modified on  : 09-02-2023
+ * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
 **/
 public with sharing class TaskDataFactory {
@@ -22,13 +22,14 @@ public with sharing class TaskDataFactory {
         for(Id accountIdCurent : accountIdList){
             taskListToInsert.add(constructOneTask(accountIdCurent));
         }
-        checkTasksPermissions(taskListToInsert);
+        checkTasksPermissionsTask(taskListToInsert);
     }
 
-    public static void checkTasksPermissions(List<Task> taskListToInsert){
-        if (Schema.sObjectType.Account.fields.Name.isCreateable() == false &&
-        Schema.sObjectType.Account.fields.Type.isCreateable() == false) {
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert an Account reccord.');
+    public static void checkTasksPermissionsTask(List<Task> taskListToInsert){
+        if (!Task.SObjectType.getDescribe().isAccessible() 
+            || !Schema.sObjectType.Task.fields.Subject.isCreateable() 
+            || !Schema.sObjectType.Task.fields.Status.isCreateable()) {
+            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert an Task reccord.');
         }else{
             insert taskListToInsert;
         }

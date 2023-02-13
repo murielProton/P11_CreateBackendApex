@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-23-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 13-02-2023
+ * @last modified by  : Muriel Proton
 **/
 @isTest
 public with sharing class PricebookEntryDataFactory_Test {
@@ -62,7 +62,7 @@ public with sharing class PricebookEntryDataFactory_Test {
                                                 WHERE Pricebook2Id = :pricebookForThisTest.Id AND Product2Id = :product2ForThisTest.Id
                                                 LIMIT 1];
 
-        System.assertEquals(pricebookEntryForThisTest.UnitPrice, 100.00, 'PricebookEntryDataFactory.createPriceBookEntry should insert a PricebookEntry.');
+        System.assertEquals(120, pricebookEntryForThisTest.UnitPrice, 'PricebookEntryDataFactory.createPriceBookEntry should insert a PricebookEntry.');
 
     }
 }
