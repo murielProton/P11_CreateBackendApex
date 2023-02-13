@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 01-30-2023
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 13-02-2023
+ * @last modified by  : Muriel Proton
 **/
 public with sharing class Product2Get {
 
@@ -22,6 +22,7 @@ public with sharing class Product2Get {
         }
         return product2ListToReturn;
     }
+    
     public static List<Product2> getProduct2ListByName(String product2Name){
         List<Product2> product2ListToReturn = new List<Product2>();
         if(Product2.SObjectType.getDescribe().isAccessible() &&

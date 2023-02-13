@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 12-02-2023
+ * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
 **/
 @isTest
@@ -24,6 +24,7 @@ public with sharing class AccountGet_Test {
 
         System.assertEquals(accountName+3, accountToTest.name, 'getAccountByName(accountName) from AccountGet should return only one Account record by the name of :'+accountName+3+'.');
     }
+
     @isTest
     public static void testGetAccountsAll(){
         
@@ -33,6 +34,7 @@ public with sharing class AccountGet_Test {
 
         System.assertEquals( 5, accountsListToTest.size(),'AccountGet.getAccountsAll() should return a list of five records.');
     }
+
     @isTest
     public static void testGetAccontsLinkedToOrders(){
         List<Account> accountList = AccountGet.getAccountsAll();
@@ -58,6 +60,19 @@ public with sharing class AccountGet_Test {
     }
 
     @isTest
+    public static void testGetAccontsByIds(){
+        List<Account> accountList = AccountGet.getAccountsAll();
+        Set<Id> accountIDSet = new Map<Id,Account>(accountList).keySet();
+
+        Test.startTest();
+        Set<Account> accountsListToTest = AccountGet.getAccontsByIds(accountIDSet);
+        Test.stopTest();
+
+        System.assertEquals( accountIDSet.size(), accountsListToTest.size(),'AccountGet.getAccontsByIds(accountIDSet) should return a set of records of all the IDs in parametter.');
+    }
+
+
+    @isTest
     public static void testGetAccountActiveTrue(){
         List<Account> accountList = AccountGet.getAccountsAll();
         AccountUpdate.updateAccountFieldActiveToTrue(accountList);
@@ -68,6 +83,7 @@ public with sharing class AccountGet_Test {
 
         System.assertEquals( accountList.size(), accountsListToTest.size(),'AccountGet.getAccountActiveTrue() should return a list of five records.');
     }
+
     @isTest
     public static void testGetAccountActiveFalse(){
         List<Account> accountList = AccountGet.getAccountsAll();
@@ -79,6 +95,7 @@ public with sharing class AccountGet_Test {
 
         System.assertEquals( accountList.size(), accountsListToTest.size(),'AccountGet.getAccountActiveFalse() should return a list of five records.');
     }
+    
     @isTest
     public static void testGetAccountNotLinkedToOrders(){
         List<Account> accountList = AccountGet.getAccountsAll();

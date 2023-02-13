@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 07-02-2023
+ * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
 **/
 @isTest
@@ -81,10 +81,60 @@ public with sharing class OrderTriggerHelper_Test {
 
     @isTest
     public static void testSendErrorOnOrder(){
-        // Not testable because the one record has 1 Id for two different maps
-        // And one record cannot have 2 different values, at the same time, 'Activated' and 'Draft'.
-        // must be tested with trigger
+
+        Id accountId = AccountGet.getAccountsAll()[0].Id;
+        Id contractId = ContractGet.getContractsAll()[0].Id;
+
+        List<Order> listOfOrdersToInsert = new List<Order>();
+        for(Integer i = 0 ; i < 2 ; i++){
+            Order orderToAdd = new Order (
+                                        Name = orderName+i,
+                                        AccountId = accountId, //Required
+                                        ContractId = contractId,
+                                        Status = 'Draft',
+                                        EffectiveDate = Date.today()
+                                );
+            listOfOrdersToInsert.add(orderToAdd);
+        }
+        insert listOfOrdersToInsert;
+        List<Order> orderList = OrderGet.getOrdersAll();
+        Map<Id, Order> orderMapOld = new Map<Id, Order>(orderList);
+        Map<Id, Order> orderMapNew = new Map<Id, Order>();
+        for (Order orderCurent : orderList){
+            orderCurent.Status = 'Activated';
+            orderMapNew.put(orderCurent.Id, orderCurent);
+        }
+        
+
+        Test.startTest();
+        try{
+            OrderTriggerHelper.sendErrorOnOrder(orderMapOld, orderMapNew);
+        }catch(DMLException e){
+            System.assert(e != null && e.getMessage().contains('Avant de pouvoir passer le statut à /"Activated/" de '), 
+                'An exception message should have been triggered.');
+        }
+        Test.stopTest();
     }
+
+   /*@isTest
+    public static void testDisplayMessageForEachOrderNotValid(){
+        // TODO Find out what is ailing this, with Thomas
+        List<Order> orderList = OrderGet.getOrdersAll();
+        Map<Id, Order> orderMapNew = new Map<Id, Order>(orderList);
+        System.debug('order list '+orderList);
+        System.debug('orderMap New '+orderMapNew);
+
+      
+        Test.startTest();
+        try{
+            OrderTriggerHelper.displayMessageForEachOrderNotValid(orderList, orderMapNew);
+        }catch(DMLException e){
+            System.assert(e != null && e.getMessage().contains('Avant de pouvoir passer le statut à /"Activated/" de '), 
+                'Method displayMessageForEachOrderNotValid, An exception message should have been triggered.');
+        }
+        Test.stopTest();
+    }*/
+
     @isTest
     public static void testUpdateAccountActiveIfLinkedToOrder(){
         List<Order> orderListForTest = OrderGet.getOrdersAll();

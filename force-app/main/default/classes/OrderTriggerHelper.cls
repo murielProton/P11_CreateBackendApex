@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 12-02-2023
+ * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
 **/
 public with sharing class OrderTriggerHelper {
@@ -11,7 +11,7 @@ public with sharing class OrderTriggerHelper {
         // If the field Status value changes from Draft to Activated
         List<Order> orderListStatusChanged = OrderFilter.orderListFilterStatusDraftToActivated(orderMapOld, orderMapNew);
         // the update part is done without intervention
-        // No need to update because we are used in a before update !!
+        // No need to update because this method is used in a before update !!
 
         // get the list for the error messages
         List<Order> oderListUnupdatable = OrderFilter.orderListFilterNOTLinkedToProduct2(orderListStatusChanged);

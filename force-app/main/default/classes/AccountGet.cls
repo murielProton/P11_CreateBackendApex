@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 12-02-2023
+ * @last modified on  : 13-02-2023
  * @last modified by  : Muriel Proton
 **/
 public with sharing class AccountGet {
@@ -51,6 +51,7 @@ public with sharing class AccountGet {
         Set<Account> accoutSetToReturn  = new Set<Account>(accoutListToReturn);
         return accoutSetToReturn;
     }
+
     public static List<Account> getAccountActiveTrue(){
         List<Account> accoutListToReturn = new List<Account>();
         checkPermissionAccount();
@@ -61,6 +62,7 @@ public with sharing class AccountGet {
                                 WHERE Active__c = true];
         return accoutListToReturn;
     }
+
     public static List<Account> getAccountActiveFalse(){
         List<Account> accoutListToReturn = new List<Account>();
         checkPermissionAccount();
@@ -71,6 +73,7 @@ public with sharing class AccountGet {
                                 WHERE Active__c = false];
         return accoutListToReturn;
     }
+    
     public static List<Account> getAccontsNOTLinkedToOrders(Set<Id> accountIDSetOfAllDeletedOrders){
         List<ID> accountIDListOfAllDeletedOrders = new List<ID>(accountIDSetOfAllDeletedOrders);
         List<Order> orderList = OrderGet.getOrdersAll();
