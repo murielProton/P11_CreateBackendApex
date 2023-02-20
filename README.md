@@ -19,16 +19,27 @@ This exercisse demands that I create a trigger on Order, two Apex classes to set
 Folow the rules of this GitHub Repository
 https://github.com/cfpb/salesforce-docs/blob/master/_pages/Salesforce-Naming-Conventions.md
 # Desigh pattern 'domain layer class'
-SobjectNameForBatch -> contains all the methodes used in the Batch.
-SobjectNameFormat -> contains all the methodes used to convert a type to an other type. (for example Lists into Sets)
-SobjectNameGet -> contains all the methodes used to get records, using SOQL.
-SobjectNameFilter -> contains all the methodes to filter throught the cited type. 
-SobjectNameDataFactory -> contains all the methodes that generates records for the tests.
-SobjectNameActionHelper_Queueable -> will regroup all methodes used by the _Queueable class, disregarding code duplication. _Queueable stands for automaticaly scheduled Batch.
-SobjectNameAction_Queueable -> Contains the methode start(), execute(), finish().  _Queueable stands for automaticaly launch code.
-SobjectNameActionExecute_Queueable -> Calls on, and instantiate _Queueable.  _Queueable stands for automaticaly launch code.
-All tests methodes begin by test.
-setupClassName -> design pattern for all setup methode begining a test class
+Classes
+ClassName_Test → Regroups all tests methods on a specific class.
+SobjectNameAction_Queueable →  Class that contains the methode start(), execute(), finish().  _Queueable stands for automaticaly launch code.
+SobjectNameActionExecute_Queueable → Class that calls on, and instantiate _Queueable.  _Queueable stands for automaticaly launch code. _Queueable stands for automaticaly launch code.
+SobjectNameActionHelper_Queueable → Class that will regroup all methodes used by the _Queueable class, disregarding code duplication. _Queueable stands for automaticaly scheduled Batch.
+SobjectNameDataFactory → Class that contains all the methodes that generates records for the tests.
+SobjectNameFilter → Class that contains all the methodes to filter throught the cited type. 
+SobjectNameGet → Class that contains all the methodes used to get records, using SOQL.
+SobjectNameTrigger _Test →  Regroups all tests methods for the Trigger.
+SobjectNameTriggerHandler → implements all the methods declared in TriggerHandler class. Calls on methods in SobjectNameTriggerHelper.
+SobjectNameTriggerHelper →  Regroups all tests methods called by SobjectNameTriggerHandler.
+TriggerHandler → methods defining how all triggers will work.
+
+Methods
+All methods begin by a verb.
+All tests methods begin by test.
+CheckSobjectNamePermissions → method that will chek CRUD before DML operation.
+setupClassName -> design pattern for all setup method begining a test class.
 # CRUD DML
 Check CRUD before DML operation documentation :
 https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_perms_enforcing.htm
+ # APex Dox
+ To use the documentation in it's full capacity, you need a WAMP server.
+ Use this link : http://localhost/P11_CreateBackendApex/ApexDocumentation/AccountDataFactory_Test.html

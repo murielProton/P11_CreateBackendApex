@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Muriel Proton
  * @group             : 
- * @last modified on  : 13-02-2023
+ * @last modified on  : 14-02-2023
  * @last modified by  : Muriel Proton
 **/
 @isTest
@@ -71,12 +71,8 @@ public with sharing class OrderFilter_Test {
             //(Order orderForThisTest, Product2 product2ForThisTest, PricebookEntry pricebookEntryForThisTest)
             orderItemsList.add(OrderItemDataFactory.constructOneOrderItem(orderCurrent.Id, product2ListForThisTest[0].Id, pricebookEntryListForThisTest[0].Id));
         }
-        
-        if (Schema.sObjectType.Order.fields.Name.isCreateable() == false) {
-            throw new CRUDPermissionBeforSOQLDMLException('You have no permission to insert an OderItem record.');
-        }else{
-            insert orderItemsList;
-        }
+        insert orderItemsList;
+
 
         //Get orderListNew
         List<Order> orderList = OrderGet.getOrdersAll();
