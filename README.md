@@ -18,7 +18,7 @@ This exercisse demands that I create a trigger on Order, two Apex classes to set
 # Naming convention design pattern
 Folow the rules of this GitHub Repository
 https://github.com/cfpb/salesforce-docs/blob/master/_pages/Salesforce-Naming-Conventions.md
-# Desigh pattern 'domain layer class'
+# Design pattern 'domain layer class'
 Classes
 ClassName_Test → Regroups all tests methods on a specific class.
 SobjectNameAction_Queueable →  Class that contains the methode start(), execute(), finish().  _Queueable stands for automaticaly launch code.
